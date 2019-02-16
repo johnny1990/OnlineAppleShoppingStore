@@ -186,6 +186,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-OnlineAppleShoppingStore-20190215113333.mdf" />
+    <Content Include="App_Data\aspnet-OnlineAppleShoppingStore-20190215113333_log.ldf">
+      <DependentUpon>aspnet-OnlineAppleShoppingStore-20190215113333.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\OnlineAppleShoppingStore.mdf" />
+    <Content Include="App_Data\OnlineAppleShoppingStore_log.ldf">
+      <DependentUpon>OnlineAppleShoppingStore.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -243,7 +251,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
