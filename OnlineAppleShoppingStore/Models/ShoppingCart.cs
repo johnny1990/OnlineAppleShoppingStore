@@ -92,8 +92,7 @@ namespace OnlineAppleShoppingStore.Models
 
         public int GetCount()
         {
-            int? count =
-                (from cartItems in db.Carts where cartItems.CartId == ShoppingCartId select (int?)cartItems.Count).Sum();
+            int? count = (from cartItems in db.Carts where cartItems.CartId == ShoppingCartId select (int?)cartItems.Count).Sum();
 
             return count ?? 0;
         }
