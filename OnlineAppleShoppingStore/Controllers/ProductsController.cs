@@ -14,7 +14,7 @@ namespace OnlineAppleShoppingStore.Controllers
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
 
         // GET: Products
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category);
@@ -22,7 +22,7 @@ namespace OnlineAppleShoppingStore.Controllers
         }
 
         // GET: Products/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
@@ -34,7 +34,7 @@ namespace OnlineAppleShoppingStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,Name,Price,Description,LastUpdated,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
@@ -49,7 +49,7 @@ namespace OnlineAppleShoppingStore.Controllers
         }
 
         // GET: Products/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,7 +70,7 @@ namespace OnlineAppleShoppingStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Name,Price,Description,LastUpdated,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace OnlineAppleShoppingStore.Controllers
         }
 
         // GET: Products/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -102,7 +102,7 @@ namespace OnlineAppleShoppingStore.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);

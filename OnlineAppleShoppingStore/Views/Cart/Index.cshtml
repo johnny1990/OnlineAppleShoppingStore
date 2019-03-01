@@ -13,7 +13,7 @@
 </div>
 @if (Model.CartItems.Count == 0)
 {
-    <a class="btn-danger" href="~/Dashboard/Index/1">Your shopping cart is empty, please continue shopping---></a>
+    <a class="btn" href="~/Dashboard/Index/1">Your shopping cart is empty, please continue shopping---></a>
 }
 else
 {
@@ -69,7 +69,7 @@ else
         <a href="~/Dashboard/Index/1">Continue shopping>></a>
     </p>
     <p class="button">
-        @Html.ActionLink("Checkout---> ", "AddressAndPayment", "Checkout")
+        @Html.ActionLink("Checkout---> ", "Payment", "Checkout")
     </p>
 }
 
