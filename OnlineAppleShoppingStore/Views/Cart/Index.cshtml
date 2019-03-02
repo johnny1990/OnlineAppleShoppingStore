@@ -7,13 +7,13 @@
 }
 
 <h3 class="text-center">
-    <span><img src="~/Content/Images/shoping_cart.png" />Your shopping cart:</span>
+    <span>Your shopping cart:</span>
 </h3>
 <div id="update-message" class="text-info">
 </div>
 @if (Model.CartItems.Count == 0)
 {
-    <a class="btn" href="~/Dashboard/Index/1">Your shopping cart is empty, please continue shopping---></a>
+    <a class="btn" href="~/Dashboard/Index/1">Your shopping cart is empty, please continue shopping...</a>
 }
 else
 {
@@ -69,7 +69,7 @@ else
         <a href="~/Dashboard/Index/1">Continue shopping>></a>
     </p>
     <p class="button">
-        @Html.ActionLink("Checkout---> ", "Payment", "Checkout")
+        @Html.ActionLink("Checkout", "Payment", "Checkout")
     </p>
 }
 

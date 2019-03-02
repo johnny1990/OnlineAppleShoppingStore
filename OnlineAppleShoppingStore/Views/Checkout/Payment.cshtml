@@ -9,23 +9,10 @@
 @using (Html.BeginForm())
 {
     <div class="weird">
-        <h2>Address And Payment</h2>
+        <h2>Order and Payment</h2>
         <fieldset>
-            <legend>Shipping Information</legend>
+            <legend>Order details</legend>
             @Html.EditorForModel()
-        </fieldset>
-        <fieldset>
-            <legend>Payment</legend>
-            <p>
-                We're running a promotion: all item is free
-                with the promo code: "FREE"
-            </p>
-            <div class="editor-label">
-                @Html.Label("Promo Code")
-            </div>
-            <div class="editor-field">
-                @Html.TextBox("PromoCode")
-            </div>
         </fieldset>
         <input type="submit" value="Submit Order" />
     </div>

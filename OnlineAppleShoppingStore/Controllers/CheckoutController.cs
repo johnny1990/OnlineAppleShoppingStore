@@ -13,11 +13,13 @@ namespace OnlineAppleShoppingStore.Controllers
     {
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
         const String PromoCode = "FREE";
+
+        [Authorize(Roles = "Customer, Administrator")]
         public ActionResult Payment()
         {
             return View();
         }
-
+        [Authorize(Roles = "Customer, Administrator")]
         [HttpPost]
         public ActionResult Payment(FormCollection values)
         {
