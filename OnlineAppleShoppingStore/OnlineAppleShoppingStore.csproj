@@ -251,6 +251,7 @@
     <Content Include="Content\Images\ipod2.jpg" />
     <Content Include="Content\Images\macbook.jpg" />
     <Content Include="Content\Images\macbook2.jpg" />
+    <Content Include="Content\Images\ProductsSale\IPhone X.png" />
     <Content Include="Database\OnlineAppleShoppingStoreEntities.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
