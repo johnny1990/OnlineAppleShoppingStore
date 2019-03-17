@@ -19,41 +19,19 @@ namespace OnlineAppleShoppingStore.Controllers
         {
             return View();
         }
+
         [Authorize(Roles = "Customer, Administrator")]
         [HttpPost]
-        public ActionResult Payment(FormCollection values)
+        public ActionResult Payment([Bind(Include = "Id,FirstName,LastName,Address,City,State,PostalCode,Country,Phone,Email,DateCreated,Amount,CustomerUserName")] Order order)
         {
-            var order = new Order();
-
-            TryUpdateModel(order);
-
-            try
+            if (ModelState.IsValid)
             {
-                if (string.Equals(values["PromoCode"], PromoCode, StringComparison.OrdinalIgnoreCase) == false)
-                {
-                    return View(order);
-                }
-                else
-                {
-                    order.CustomerUserName = User.Identity.Name;
-                    order.DateCreated = DateTime.Now;
-
-                    db.Orders.Add(order);
-                    db.SaveChanges();
-
-                    var cart = ShoppingCart.GetCart(this.HttpContext);
-                    cart.CreateOrder(order);
-
-                    db.SaveChanges();//we have received the total amount lets update it
-
-                    return RedirectToAction("Complete", new { id = order.Id });
-                }
+                db.Orders.Add(order);
+                db.SaveChanges();
+                return RedirectToAction("Complete", new { id = order.Id });
             }
-            catch (Exception ex)
-            {
-                ex.InnerException.ToString();
-                return View(order);
-            }
+
+            return View(order);
         }
 
         public ActionResult Complete(int id)

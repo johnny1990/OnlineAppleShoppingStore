@@ -251,6 +251,9 @@
     <Content Include="Content\Images\ipod2.jpg" />
     <Content Include="Content\Images\macbook.jpg" />
     <Content Include="Content\Images\macbook2.jpg" />
+    <Content Include="Content\Images\ProductsSale\IPad 4.png" />
+    <Content Include="Content\Images\ProductsSale\IPad 6.png" />
+    <Content Include="Content\Images\ProductsSale\IPhone 8 .png" />
     <Content Include="Content\Images\ProductsSale\IPhone X.png" />
     <Content Include="Database\OnlineAppleShoppingStoreEntities.sql" />
     <Content Include="favicon.ico" />
