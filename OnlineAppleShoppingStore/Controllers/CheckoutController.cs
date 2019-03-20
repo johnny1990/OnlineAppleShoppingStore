@@ -12,7 +12,6 @@ namespace OnlineAppleShoppingStore.Controllers
     public class CheckoutController : Controller
     {
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
-        const String PromoCode = "FREE";
 
         [Authorize(Roles = "Customer, Administrator")]
         public ActionResult Payment()
