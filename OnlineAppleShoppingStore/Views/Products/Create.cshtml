@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LastUpdated, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LastUpdated, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.ToString("dd/MM/yyyy h:mm:ss", CultureInfo.InvariantCulture) } })
+                @Html.EditorFor(model => model.LastUpdated, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.ToString("MM/dd/yyyy h:mm:ss", CultureInfo.InvariantCulture) } })
                 @Html.ValidationMessageFor(model => model.LastUpdated, "", new { @class = "text-danger" })
             </div>
         </div>
