@@ -1,0 +1,39 @@
+﻿@model IEnumerable<OnlineAppleShoppingStore.Models.ProductsOrdered>
+
+@{
+    ViewBag.Title = "ProductsOrderedReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ProductsOrderedReport</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+ 
+    </tr>
+}
+
+</table>
