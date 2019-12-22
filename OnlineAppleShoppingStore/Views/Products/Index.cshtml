@@ -1,4 +1,7 @@
-﻿@model IEnumerable<OnlineAppleShoppingStore.Models.Product>
+﻿@using PagedList.Mvc; @*//import this so we get our HTML Helper*@
+@using PagedList; @*//import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@model IPagedList<OnlineAppleShoppingStore.Models.Product>
+@*model IEnumerable<OnlineAppleShoppingStore.Models.Product>*@
 @{
     ViewBag.Title = "Product List";
 }
@@ -12,16 +15,16 @@
             Category
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.First().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.First().Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.First().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastUpdated)
+            @Html.DisplayNameFor(model => model.First().LastUpdated)
         </th>
         <th></th>
     </tr>
@@ -50,3 +53,4 @@
         </tr>
     }
 </table>
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))

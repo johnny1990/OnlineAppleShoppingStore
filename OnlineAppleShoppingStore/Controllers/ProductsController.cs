@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace OnlineAppleShoppingStore.Controllers
 {
@@ -15,10 +16,13 @@ namespace OnlineAppleShoppingStore.Controllers
 
         // GET: Products
         [Authorize(Roles = "Administrator")]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+            //return View(products.ToList());
+
+            return View(products.ToList().ToPagedList(page ?? 1, 10));
+
         }
 
         // GET: Products/Create
