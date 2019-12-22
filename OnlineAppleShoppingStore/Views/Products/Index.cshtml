@@ -1,7 +1,6 @@
-﻿@using PagedList.Mvc; @*//import this so we get our HTML Helper*@
-@using PagedList; @*//import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+﻿@using PagedList.Mvc; 
+@using PagedList; 
 @model IPagedList<OnlineAppleShoppingStore.Models.Product>
-@*model IEnumerable<OnlineAppleShoppingStore.Models.Product>*@
 @{
     ViewBag.Title = "Product List";
 }
