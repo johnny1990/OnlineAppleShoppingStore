@@ -48,7 +48,7 @@ else
                 </td>
                 <td>
                     <div>
-                        <button type="button" class="btn btn-outline-dark" id="Remove" name="Remove" value="">
+                        <button type="button" class="btn btn-danger" id="Remove" name="Remove" value="">
                             <a href="" class="RemoveLink" data-id="@item.ProductId">
                                 Remove from cart
                             </a>
@@ -71,11 +71,11 @@ else
     </table>
 
     <div>
-        <button type="button" class="btn btn-outline-dark" id="ContinueShopping" name="ContinueShopping" value=""><a href="~/Dashboard/Index/1">Continue shopping</a></button>
+        <button type="button" class="btn btn-success" id="ContinueShopping" name="ContinueShopping" value=""><a href="~/Dashboard/Index/1">Continue shopping</a></button>
     </div>
 
     <div>
-        <button type="button" class="btn btn-outline-dark" id="Checkout" name="Checkout" value="">@Html.ActionLink("Checkout", "Payment", "Checkout")</button>
+        <button type="button" class="btn btn-primary" id="Checkout" name="Checkout" value="">@Html.ActionLink("Checkout", "Payment", "Checkout")</button>
     </div>
    
 }

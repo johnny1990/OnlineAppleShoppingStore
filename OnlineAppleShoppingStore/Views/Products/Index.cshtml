@@ -1,12 +1,29 @@
-﻿@using PagedList.Mvc; 
-@using PagedList; 
+﻿@using PagedList.Mvc;
+@using PagedList;
 @model IPagedList<OnlineAppleShoppingStore.Models.Product>
 @{
     ViewBag.Title = "Product List";
 }
+
+
 <h2>Manage Products</h2>
+
+<div class="card">
+    <div class="card-header text-center bg-secondary text-light font-weight-bold">
+        BOXING WORKOUT
+    </div>
+
+    <div class="card-body">
+        <div class="bg-warning text-light text-center font-weight-bold ">JUMP ROPE</div>
+
+    </div>
+</div>
+
+
+
 <p>
-    @Html.ActionLink("New product", "Create")
+
+    <button type="button" class="btn btn-warning">@Html.ActionLink("New product", "Create")</button>
 </p>
 <table class="table">
     <tr>
@@ -46,8 +63,8 @@
                 @Html.DisplayFor(modelItem => item.LastUpdated)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <button type="button" class="btn btn-primary">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button> |
+                <button type="button" class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
             </td>
         </tr>
     }
