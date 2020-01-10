@@ -9,12 +9,9 @@
 <h2>Manage Products</h2>
 
 
-
-
-
 <p>
 
-    <button type="button" class="btn btn-warning">@Html.ActionLink("New product", "Create")</button>
+    <button type="button" class="btn btn-default">@Html.ActionLink("New product", "Create")</button>
 </p>
 <table class="table">
     <tr>
@@ -54,8 +51,8 @@
                 @Html.DisplayFor(modelItem => item.LastUpdated)
             </td>
             <td>
-                <button type="button" class="btn btn-primary">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button> |
-                <button type="button" class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                <button type="button" class="btn btn-default" >@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button> |
+                <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
             </td>
         </tr>
     }
