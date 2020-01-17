@@ -37,8 +37,19 @@ namespace OnlineAppleShoppingStore.Controllers
             return View(s);
         }
 
+        [HttpGet]
+        public JsonResult GetDataAsJson()
+        {
+            var allData = (from orders in db.Orders
+                           group orders by orders.DateCreated into dateGroup
+                           select new OrderDateList()
+                           {
+                               Date = dateGroup.Key,
+                               Count = dateGroup.Count()
+                           });
 
-
-
+            var data = allData.ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
     }
 }

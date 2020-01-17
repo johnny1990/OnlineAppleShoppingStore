@@ -254,6 +254,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap4.css" />
+    <Content Include="Content\Statistics\BarChart.css" />
+    <Content Include="Content\Statistics\Chart.css" />
     <Content Include="Content\Images\ipad.jpg" />
     <Content Include="Content\Images\ipad2.jpg" />
     <Content Include="Content\Images\iphone.jpg" />
@@ -399,6 +401,8 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\Statistics\BarChart.js" />
+    <Content Include="Scripts\Statistics\TestChart.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -461,6 +465,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Statistics\TestChartValues.cshtml" />
+    <Content Include="Views\Statistics\BarChart.cshtml" />
+    <Content Include="Views\Statistics\PieGraph1.cshtml" />
+    <Content Include="Views\Statistics\PieGraph2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -474,9 +482,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Statistics\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
