@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9fdcbb59eb394f26b7dc694bb3eceb30" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Cart" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Category" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Customer" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Order" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Product" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.ProductsOrdered" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="OnlineAppleShoppingStoreModel.FK_dbo_Carts_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineAppleShoppingStoreModel.FK_dbo_Products_dbo_Categories_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineAppleShoppingStoreModel.FK_dbo_ProductsOrdered_dbo_Orders_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineAppleShoppingStoreModel.FK_dbo_ProductsOrdered_dbo_Products_ProductId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
