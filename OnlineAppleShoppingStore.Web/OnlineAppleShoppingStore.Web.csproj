@@ -198,6 +198,7 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OnlineAppleShoppingStoreModel.Context.cs">
@@ -361,6 +362,8 @@
     <Content Include="Views\Statistics\PieGraph1.cshtml" />
     <Content Include="Views\Statistics\PieGraph2.cshtml" />
     <Content Include="Views\Statistics\TestChartValues.cshtml" />
+    <Content Include="Views\Home\Feedback.cshtml" />
+    <Content Include="Views\Home\Sent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
