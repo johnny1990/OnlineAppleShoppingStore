@@ -13,6 +13,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         Statistics s = new Statistics();
 
         // GET: Statistics
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var data = (from orders in db.Orders
@@ -37,6 +38,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View(s);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public JsonResult GetDataAsJson()
         {

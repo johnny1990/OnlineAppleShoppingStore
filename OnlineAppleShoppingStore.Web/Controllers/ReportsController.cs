@@ -11,13 +11,14 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     {
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
 
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult OrdersReport()
         {
             return View(db.Orders.ToList());
 
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult ProductsOrderedReport()
         {
             return View(db.ProductsOrdereds.ToList());
