@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Web.Tests", "OnlineAppleShoppingStore.Web.Tests\OnlineAppleShoppingStore.Web.Tests.csproj", "{E4A49825-FF43-45C2-B60D-4EFAEDF37E54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Entities", "OnlineAppleShoppingStore.Entities\OnlineAppleShoppingStore.Entities.csproj", "{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Contracts", "OnlineAppleShoppingStore.Contracts\OnlineAppleShoppingStore.Contracts.csproj", "{C0763F70-AB8D-4881-B69A-B401425C4157}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Repositories", "OnlineAppleShoppingStore.Repositories\OnlineAppleShoppingStore.Repositories.csproj", "{956F0AC4-B6F8-495B-971A-EC8610B9750A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{E4A49825-FF43-45C2-B60D-4EFAEDF37E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4A49825-FF43-45C2-B60D-4EFAEDF37E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4A49825-FF43-45C2-B60D-4EFAEDF37E54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0763F70-AB8D-4881-B69A-B401425C4157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0763F70-AB8D-4881-B69A-B401425C4157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0763F70-AB8D-4881-B69A-B401425C4157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0763F70-AB8D-4881-B69A-B401425C4157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{956F0AC4-B6F8-495B-971A-EC8610B9750A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{956F0AC4-B6F8-495B-971A-EC8610B9750A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{956F0AC4-B6F8-495B-971A-EC8610B9750A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{956F0AC4-B6F8-495B-971A-EC8610B9750A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
