@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Contracts\OnlineAppleShoppingStore.Contracts.csproj">
+      <Project>{C0763F70-AB8D-4881-B69A-B401425C4157}</Project>
+      <Name>OnlineAppleShoppingStore.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Entities\OnlineAppleShoppingStore.Entities.csproj">
+      <Project>{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}</Project>
+      <Name>OnlineAppleShoppingStore.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

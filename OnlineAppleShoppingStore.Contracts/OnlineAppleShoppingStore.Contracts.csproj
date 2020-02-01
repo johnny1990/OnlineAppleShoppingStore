@@ -41,7 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICategoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Entities\OnlineAppleShoppingStore.Entities.csproj">
+      <Project>{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}</Project>
+      <Name>OnlineAppleShoppingStore.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
