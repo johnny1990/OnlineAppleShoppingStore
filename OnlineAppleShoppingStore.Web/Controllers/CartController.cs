@@ -1,4 +1,5 @@
-﻿using OnlineAppleShoppingStore.Web.Models;
+﻿using OnlineAppleShoppingStore.Entities.Models;
+using OnlineAppleShoppingStore.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

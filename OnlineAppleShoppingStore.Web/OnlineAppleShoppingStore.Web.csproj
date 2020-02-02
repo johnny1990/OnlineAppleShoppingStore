@@ -185,6 +185,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -201,43 +202,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Cart.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Customer.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\OnlineAppleShoppingStoreModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineAppleShoppingStoreModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineAppleShoppingStoreModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineAppleShoppingStoreModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineAppleShoppingStoreModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\OrderDateList.cs" />
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductsOrdered.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Statistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,25 +247,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\OnlineAppleShoppingStoreModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineAppleShoppingStoreModel.edmx</DependentUpon>
-      <LastGenOutput>OnlineAppleShoppingStoreModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\OnlineAppleShoppingStoreModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineAppleShoppingStoreModel.edmx</DependentUpon>
-      <LastGenOutput>OnlineAppleShoppingStoreModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\OnlineAppleShoppingStoreModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OnlineAppleShoppingStoreModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\OnlineAppleShoppingStoreModel.edmx.diagram">
-      <DependentUpon>OnlineAppleShoppingStoreModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\d3\d3.js" />
     <Content Include="Scripts\d3\d3.min.js" />
     <Content Include="Scripts\d3\d3pie.min.js" />
@@ -392,6 +343,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Contracts\OnlineAppleShoppingStore.Contracts.csproj">
+      <Project>{C0763F70-AB8D-4881-B69A-B401425C4157}</Project>
+      <Name>OnlineAppleShoppingStore.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Entities\OnlineAppleShoppingStore.Entities.csproj">
+      <Project>{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}</Project>
+      <Name>OnlineAppleShoppingStore.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Repositories\OnlineAppleShoppingStore.Repositories.csproj">
+      <Project>{956F0AC4-B6F8-495B-971A-EC8610B9750A}</Project>
+      <Name>OnlineAppleShoppingStore.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

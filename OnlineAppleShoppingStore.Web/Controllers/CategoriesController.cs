@@ -1,4 +1,6 @@
-﻿using OnlineAppleShoppingStore.Web.Models;
+﻿using OnlineAppleShoppingStore.Contracts;
+using OnlineAppleShoppingStore.Entities.Models;
+using OnlineAppleShoppingStore.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,13 +13,19 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class CategoriesController : Controller
     {
-        private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
+
+        private readonly ICategoryRepository repository;
+
+        public CategoriesController(ICategoryRepository objIrepository)
+        {
+            repository = objIrepository;
+        }
 
         // GET: Categories
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(repository.All.ToList());
         }
 
         // GET: Categories/Create
@@ -37,8 +45,8 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                repository.Insert(category);
+                repository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -49,16 +57,18 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = repository.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
             }
             return View(category);
+
         }
 
         // POST: Categories/Edit/5
@@ -68,13 +78,14 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
-        {
+        {            
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                repository.Update(category);
+                repository.Save();
                 return RedirectToAction("Index");
             }
+
             return View(category);
         }
 
@@ -86,7 +97,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = repository.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -100,17 +111,17 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            repository.Delete(id);
+            repository.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
+
             if (disposing)
             {
-                db.Dispose();
+                repository.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -6,7 +6,6 @@ namespace OnlineAppleShoppingStore.Web.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
-    using Ninject.Web.Common.WebHost;
     using OnlineAppleShoppingStore.Contracts;
     using OnlineAppleShoppingStore.Repositories;
     using System;
@@ -46,7 +45,7 @@ namespace OnlineAppleShoppingStore.Web.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                kernel.Bind<IProductsRepository>().To<ProductsRepository>();
+                kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
 
                 RegisterServices(kernel);
                 return kernel;
