@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
 using PagedList;
@@ -15,15 +16,24 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     {
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
 
+        //private readonly IProductsRepository repository;
+
+        //public ProductsController(IProductsRepository objIrepository)
+        //{
+        //    repository = objIrepository;
+        //}
+
         // GET: Products
         [Authorize(Roles = "Administrator")]
         public ActionResult Index(int? page)
         {
             var products = db.Products.Include(p => p.Category);
-            //return View(products.ToList());
 
             return View(products.ToList().ToPagedList(page ?? 1, 10));
 
+            //var products = repository.All.Include(p => p.Category);
+
+            //return View(repository.All.ToList().ToPagedList(page ?? 1, 10));
         }
 
         // GET: Products/Create
@@ -31,6 +41,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+          //ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name");
             return View();
         }
 
@@ -49,7 +60,17 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
+            //if (ModelState.IsValid)
+            //{
+            //    repository.Insert(product);
+            //    repository.Save();
+            //    return RedirectToAction("Index");
+            //}
+
+
+             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
+
+            //ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -68,6 +89,20 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
+
+
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Product product = repository.Find(id);
+        //    if (product == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name", product.CategoryId);
+        //    return View(product);
         }
 
         // POST: Products/Edit/5
@@ -86,6 +121,18 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
+
+
+            //if (ModelState.IsValid)
+            //{
+            //    repository.Update(product);
+            //    repository.Save();
+            //    return RedirectToAction("Index");
+            //}
+
+            //ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name", product.CategoryId);
+            //return View(product);
+
         }
 
         // GET: Products/Delete/5
@@ -102,6 +149,17 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return HttpNotFound();
             }
             return View(product);
+
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Product product = repository.Find(id);
+            //if (product == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(product);
         }
 
         // POST: Products/Delete/5
@@ -114,6 +172,10 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+
+            //repository.Delete(id);
+            //repository.Save();
+            //return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

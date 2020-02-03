@@ -13,7 +13,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class CategoriesController : Controller
     {
-
         private readonly ICategoryRepository repository;
 
         public CategoriesController(ICategoryRepository objIrepository)
