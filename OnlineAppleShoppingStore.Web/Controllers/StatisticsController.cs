@@ -1,4 +1,5 @@
-﻿using OnlineAppleShoppingStore.Entities.Models;
+﻿using OnlineAppleShoppingStore.Contracts;
+using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,20 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class StatisticsController : Controller
     {
-        private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
+        private readonly IOrdersRepository repository;
+
+        public StatisticsController(IOrdersRepository objIrepository)
+        {
+            repository = objIrepository;
+        }
+
         Statistics s = new Statistics();
 
         // GET: Statistics
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
-            var data = (from orders in db.Orders
+            var data = (from orders in repository.All
                         group orders by orders.DateCreated into dateGroup
                         select new OrderDateList()
                         {
@@ -25,7 +32,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                             Count = dateGroup.Count()
                         }).Take(10);
 
-            var allData = (from orders in db.Orders
+            var allData = (from orders in repository.All
                            group orders by orders.DateCreated into dateGroup
                            select new OrderDateList()
                            {
@@ -43,7 +50,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [HttpGet]
         public JsonResult GetDataAsJson()
         {
-            var allData = (from orders in db.Orders
+            var allData = (from orders in repository.All
                            group orders by orders.DateCreated into dateGroup
                            select new OrderDateList()
                            {
