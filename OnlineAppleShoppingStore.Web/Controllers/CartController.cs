@@ -1,4 +1,5 @@
-﻿using OnlineAppleShoppingStore.Entities.Models;
+﻿using OnlineAppleShoppingStore.Contracts;
+using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,15 @@ using System.Web.Mvc;
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class CartController : Controller
-    {
-       
-        private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
+    {   
+        private readonly IProductsRepository repository;
+        private readonly ICartsRepository repository_c;
+
+        public CartController(IProductsRepository objIrepository, ICartsRepository objIrepository_c)
+        {
+            repository = objIrepository;
+            repository_c = objIrepository_c;
+        }
 
         public ActionResult Index()
         {
@@ -38,7 +45,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         public ActionResult AddToCart(int id)
         {
-            var addedProduct = db.Products.Single(product => product.Id == id);
+            var addedProduct = repository.All.Single(product => product.Id == id);
 
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
@@ -52,7 +59,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
-            string productName = db.Carts.FirstOrDefault(item => item.ProductId == id).Product.Name;
+            string productName = repository_c.All.FirstOrDefault(item => item.ProductId == id).Product.Name;
 
             int itemCount = cart.RemoveFromCart(id);
 
