@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ICategoryRepository.cs" />
     <Compile Include="IOrdersRepository.cs" />
+    <Compile Include="IProductsOrderedRepository.cs" />
     <Compile Include="IProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

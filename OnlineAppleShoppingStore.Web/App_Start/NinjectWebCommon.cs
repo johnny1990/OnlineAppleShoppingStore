@@ -48,6 +48,7 @@ namespace OnlineAppleShoppingStore.Web.App_Start
                 kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
                 kernel.Bind<IProductsRepository>().To<ProductsRepository>();
                 kernel.Bind<IOrdersRepository>().To<OrdersRepository>();
+                kernel.Bind<IProductsOrderedRepository>().To<ProductsOrderedRepository>();
 
                 RegisterServices(kernel);
                 return kernel;
