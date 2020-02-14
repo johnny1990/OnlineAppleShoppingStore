@@ -22,9 +22,25 @@ namespace OnlineAppleShoppingStore.Repositories
             get { return _db.Carts; }
         }
 
+        public void Delete(int id)
+        {
+            var c = _db.Categories.Find(id);
+            _db.Categories.Remove(c);
+        }
+
         public void Dispose()
         {
             _db.Dispose();
+        }
+
+        public void Insert(Cart cart)
+        {
+            _db.Carts.Add(cart);
+        }
+
+        public void Save()
+        {
+            _db.SaveChanges();
         }
     }
 }

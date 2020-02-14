@@ -24,8 +24,8 @@ namespace OnlineAppleShoppingStore.Repositories
 
         public void Delete(int id)
         {
-            var bus = _db.Categories.Find(id);
-            _db.Categories.Remove(bus);
+            var cat = _db.Categories.Find(id);
+            _db.Categories.Remove(cat);
         }
 
         public void Dispose()

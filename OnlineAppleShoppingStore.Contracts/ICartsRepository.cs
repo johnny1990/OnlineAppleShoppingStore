@@ -10,5 +10,8 @@ namespace OnlineAppleShoppingStore.Contracts
     public interface ICartsRepository : IDisposable
     {
         IQueryable<Cart> All { get; }
+        void Insert(Cart cart);
+        void Delete(int id);
+        void Save();
     }
 }

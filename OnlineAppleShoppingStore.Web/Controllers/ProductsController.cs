@@ -16,12 +16,14 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     {
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
 
-        //private readonly IProductsRepository repository;
+        private readonly IProductsRepository repository;
+        private readonly ICategoryRepository repository_c;
 
-        //public ProductsController(IProductsRepository objIrepository)
-        //{
-        //    repository = objIrepository;
-        //}
+        public ProductsController(IProductsRepository objIrepository, ICategoryRepository objIrepository_c)
+        {
+            repository = objIrepository;
+            repository_c = objIrepository_c;
+        }
 
         // GET: Products
         [Authorize(Roles = "Administrator")]
@@ -33,7 +35,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
             //var products = repository.All.Include(p => p.Category);
 
-            //return View(repository.All.ToList().ToPagedList(page ?? 1, 10));
+            // return View(repository.All.ToList().ToPagedList(page ?? 1, 10));
         }
 
         // GET: Products/Create
