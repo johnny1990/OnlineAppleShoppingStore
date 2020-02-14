@@ -1,4 +1,5 @@
-﻿using OnlineAppleShoppingStore.Entities.Models;
+﻿using OnlineAppleShoppingStore.Contracts;
+using OnlineAppleShoppingStore.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,21 @@ namespace OnlineAppleShoppingStore.Web.Models
     public partial class ShoppingCart
     {
         OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
+
+        
+        private readonly ICartsRepository repository_carts;
+        private readonly IProductsOrderedRepository repository_po;
+
+        public ShoppingCart()
+        {
+        }
+
+        public ShoppingCart( ICartsRepository objIrepository_carts, IProductsOrderedRepository objIrepository_po)
+        {
+            repository_po = objIrepository_po;
+            repository_carts = objIrepository_carts;
+        }
+   
 
         public string ShoppingCartId { get; set; }
 
