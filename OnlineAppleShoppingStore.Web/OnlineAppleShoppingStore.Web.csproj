@@ -353,6 +353,10 @@
       <Project>{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}</Project>
       <Name>OnlineAppleShoppingStore.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Logger\OnlineAppleShoppingStore.Logger.csproj">
+      <Project>{40af65f7-c066-4422-b1bd-5c9dd9249c1f}</Project>
+      <Name>OnlineAppleShoppingStore.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OnlineAppleShoppingStore.Repositories\OnlineAppleShoppingStore.Repositories.csproj">
       <Project>{956F0AC4-B6F8-495B-971A-EC8610B9750A}</Project>
       <Name>OnlineAppleShoppingStore.Repositories</Name>

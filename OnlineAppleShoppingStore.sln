@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Repositories", "OnlineAppleShoppingStore.Repositories\OnlineAppleShoppingStore.Repositories.csproj", "{956F0AC4-B6F8-495B-971A-EC8610B9750A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Logger", "OnlineAppleShoppingStore.Logger\OnlineAppleShoppingStore.Logger.csproj", "{40AF65F7-C066-4422-B1BD-5C9DD9249C1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{956F0AC4-B6F8-495B-971A-EC8610B9750A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{956F0AC4-B6F8-495B-971A-EC8610B9750A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{956F0AC4-B6F8-495B-971A-EC8610B9750A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40AF65F7-C066-4422-B1BD-5C9DD9249C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40AF65F7-C066-4422-B1BD-5C9DD9249C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40AF65F7-C066-4422-B1BD-5C9DD9249C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40AF65F7-C066-4422-B1BD-5C9DD9249C1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
