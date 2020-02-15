@@ -22,17 +22,25 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // GET: Index
         public ActionResult Index(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            Category category = repository.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
+                Category category = repository.Find(id);
+                if (category == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(category);
             }
-            return View(category);
+            catch(Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }                        
         }
     }
 }

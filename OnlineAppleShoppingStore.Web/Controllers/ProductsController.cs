@@ -29,13 +29,22 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Index(int? page)
         {
-            var products = db.Products.Include(p => p.Category);
+            try
+            {
+                var products = db.Products.Include(p => p.Category);
 
-            return View(products.ToList().ToPagedList(page ?? 1, 10));
+                return View(products.ToList().ToPagedList(page ?? 1, 10));
 
-            //var products = repository.All.Include(p => p.Category);
+                //var products = repository.All.Include(p => p.Category);
 
-            // return View(repository.All.ToList().ToPagedList(page ?? 1, 10));
+                // return View(repository.All.ToList().ToPagedList(page ?? 1, 10));
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
+           
         }
 
         // GET: Products/Create

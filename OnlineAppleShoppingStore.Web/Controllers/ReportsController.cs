@@ -11,8 +11,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class ReportsController : Controller
     {
-        private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();//>> delete???
-
         private readonly IOrdersRepository repository;
         private readonly IProductsOrderedRepository repository_o;
 
@@ -25,14 +23,32 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult OrdersReport()
         {
-            return View(repository.All.ToList());
+            try
+            {
+                return View(repository.All.ToList());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
+            
 
         }
 
         [Authorize(Roles = "Administrator")]
         public ActionResult ProductsOrderedReport()
-        {
-            return View(repository_o.All.ToList());
+        { 
+            try
+            {
+                return View(repository_o.All.ToList());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
+            
         }
     }
 }

@@ -24,7 +24,16 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
-            return View(repository.All.ToList());
+            try
+            {
+                return View(repository.All.ToList());
+            }
+            catch(Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
+            
         }
 
         // GET: Categories/Create

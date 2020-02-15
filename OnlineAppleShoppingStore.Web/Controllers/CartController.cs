@@ -22,15 +22,22 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         public ActionResult Index()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-
-            var viewModel = new OnlineAppleShoppingStore.Web.Utilities.Cart
+            try
             {
-                CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
-            };
+                var cart = ShoppingCart.GetCart(this.HttpContext);
 
-            return View(viewModel);
+                var viewModel = new OnlineAppleShoppingStore.Web.Utilities.Cart
+                {
+                    CartItems = cart.GetCartItems(),
+                    CartTotal = cart.GetTotal()
+                };
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();//?? to change!!!!!
+            }
         }
 
         [ChildActionOnly]
