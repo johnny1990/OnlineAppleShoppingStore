@@ -87,6 +87,7 @@
                             </p>
                             <p class="text-center">
                                 @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = product.Id }, new { @class = "btn btn-info" })
+                                @Html.ActionLink(Model.Name, "Browse", new { category = Model.Name })
                             </p>
                         </div>
                     </div>

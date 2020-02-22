@@ -42,5 +42,24 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return HttpNotFound();
             }                        
         }
+
+        public ActionResult Browse(string cat)
+        {
+            var categorie = repository.Alls.Include("Products")
+               .Single(g => g.Name == cat);
+
+            return View(categorie);
+        }
+
+        [ChildActionOnly]
+        [HttpGet]
+        public ActionResult Menu()
+        {
+            var catagories = repository.All.ToList();
+
+            return PartialView(catagories);
+        }
+        //Browse???????
+        //etc....
     }
 }

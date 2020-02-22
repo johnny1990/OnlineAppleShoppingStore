@@ -1,0 +1,11 @@
+﻿@model IEnumerable<OnlineAppleShoppingStore.Entities.Models.Category>
+<ul id="categories">
+    @foreach (var type in Model)
+    {
+        <li>
+            @Html.ActionLink(type.Name,
+                "Browse", "Dashboard",
+                new { Type = type.Name }, null)
+        </li>
+    }
+</ul>

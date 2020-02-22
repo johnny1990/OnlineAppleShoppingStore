@@ -327,6 +327,8 @@
     <Content Include="Views\Statistics\TestChartValues.cshtml" />
     <Content Include="Views\Home\Feedback.cshtml" />
     <Content Include="Views\Home\Sent.cshtml" />
+    <Content Include="Views\Dashboard\Browse.cshtml" />
+    <Content Include="Views\Dashboard\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

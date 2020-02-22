@@ -1,0 +1,22 @@
+﻿@model  OnlineAppleShoppingStore.Entities.Models.Category
+
+@{
+    ViewBag.Title = "Browse Products";
+}
+
+<div class="genre">
+    <h3><em>@Model.Name</em> Items</h3>
+
+    <ul id="item-list">
+        @foreach (var item in Model.Products)
+        {
+            <li>
+                <a href="@Url.Action("Details", new { id = item.Id })">
+                    <img alt="@item.Name" src="@item.LastUpdated" />
+                    <span>@item.Name</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
