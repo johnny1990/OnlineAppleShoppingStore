@@ -58,6 +58,10 @@
       <Project>{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}</Project>
       <Name>OnlineAppleShoppingStore.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OnlineAppleShoppingStoreAuth.Entities\OnlineAppleShoppingStoreAuth.Entities.csproj">
+      <Project>{7b110f65-d5bb-400b-b533-42cf22dc55e4}</Project>
+      <Name>OnlineAppleShoppingStoreAuth.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
