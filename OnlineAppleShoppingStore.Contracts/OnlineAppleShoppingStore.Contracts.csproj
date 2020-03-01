@@ -50,6 +50,7 @@
     <Compile Include="IOrdersRepository.cs" />
     <Compile Include="IProductsOrderedRepository.cs" />
     <Compile Include="IProductsRepository.cs" />
+    <Compile Include="IUsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -59,7 +59,5 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
             return PartialView(catagories);
         }
-        //Browse???????
-        //etc....
     }
 }
