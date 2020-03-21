@@ -189,6 +189,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -329,6 +330,8 @@
     <Content Include="Views\Home\Sent.cshtml" />
     <Content Include="Views\Dashboard\Browse.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
+    <Content Include="Views\Administration\Dashboard.cshtml" />
+    <Content Include="Views\Administration\UsersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -363,7 +366,12 @@
       <Project>{956F0AC4-B6F8-495B-971A-EC8610B9750A}</Project>
       <Name>OnlineAppleShoppingStore.Repositories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OnlineAppleShoppingStoreAuth.Entities\OnlineAppleShoppingStoreAuth.Entities.csproj">
+      <Project>{7b110f65-d5bb-400b-b533-42cf22dc55e4}</Project>
+      <Name>OnlineAppleShoppingStoreAuth.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
