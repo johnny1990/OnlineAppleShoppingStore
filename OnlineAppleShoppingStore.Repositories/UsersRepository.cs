@@ -46,6 +46,13 @@ namespace OnlineAppleShoppingStore.Repositories
         public void Save()
         {
             _db.SaveChanges();
-        }    
+        }
+
+        public AspNetUser Find(string id)
+        {
+            AspNetUser user = new AspNetUser();
+            user = _db.AspNetUsers.Where(p => p.Id == id).FirstOrDefault();
+            return user;
+        }     
     }
 }

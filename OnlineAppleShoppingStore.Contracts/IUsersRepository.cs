@@ -10,6 +10,7 @@ namespace OnlineAppleShoppingStore.Contracts
     public interface IUsersRepository : IDisposable
     {
         IQueryable<AspNetUser> All { get; }
+        AspNetUser Find(string id);
         void Insert(AspNetUser user);
         void Update(AspNetUser user);
         void Delete(int id);

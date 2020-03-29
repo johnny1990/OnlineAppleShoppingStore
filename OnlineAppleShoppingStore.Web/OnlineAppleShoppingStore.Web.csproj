@@ -332,6 +332,8 @@
     <Content Include="Views\Dashboard\Menu.cshtml" />
     <Content Include="Views\Administration\Dashboard.cshtml" />
     <Content Include="Views\Administration\UsersList.cshtml" />
+    <Content Include="Views\Administration\DeleteUser.cshtml" />
+    <Content Include="Views\Administration\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
