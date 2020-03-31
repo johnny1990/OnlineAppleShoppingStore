@@ -14,10 +14,12 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     public class AdministrationController : Controller
     {
         private readonly IUsersRepository repository;
+        private readonly IRolesRepository repository_R;
 
-        public AdministrationController(IUsersRepository objIrepository)
+        public AdministrationController(IUsersRepository objIrepository, IRolesRepository objIrepository_R)
         {
             repository = objIrepository;
+            repository_R = objIrepository_R;
         }
 
         public ActionResult Dashboard()
@@ -87,6 +89,10 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             repository.Save();
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Roles
+
         #endregion
 
     }
