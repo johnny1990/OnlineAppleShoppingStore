@@ -29,7 +29,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         #region Users       
         [HttpGet]
-        public ActionResult UsersList()
+        public ActionResult Users()
         {
             return View(repository.All.ToList());
         }
@@ -52,13 +52,13 @@ namespace OnlineAppleShoppingStore.Web.Controllers
   
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edituser([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUser aspNetUser)
+        public ActionResult EditUser([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUser aspNetUser)
         {
             if (ModelState.IsValid)
             {
                 repository.Update(aspNetUser);
                 repository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("Users");
             }
             return View(aspNetUser);
         }
@@ -80,19 +80,97 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View(user);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteUser")]
         [ValidateAntiForgeryToken]
         //[Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);
             repository.Save();
-            return RedirectToAction("Index");
+            return RedirectToAction("Users");
         }
         #endregion
 
         #region Roles
+      
+        public ActionResult Roles()
+        {
+            return View(repository_R.All.ToList());
+        }
 
+    
+        public ActionResult NewRole()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewRole([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
+        {
+            if (ModelState.IsValid)
+            {
+                repository_R.Insert(aspNetRole);
+                repository_R.Save();
+                return RedirectToAction("Roles");
+            }
+
+            return View(aspNetRole);
+        }
+
+        
+        public ActionResult EditRole(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AspNetRole aspNetRole = repository_R.Find(id);
+            if (aspNetRole == null)
+            {
+                return HttpNotFound();
+            }
+            return View(aspNetRole);
+        }
+
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
+        {
+            if (ModelState.IsValid)
+            {
+                repository_R.Update(aspNetRole);
+                repository_R.Save();
+                return RedirectToAction("Roles");
+            }
+            return View(aspNetRole);
+        }
+
+        
+        public ActionResult DeleteRole(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AspNetRole aspNetRole = repository_R.Find(id);
+            if (aspNetRole == null)
+            {
+                return HttpNotFound();
+            }
+            return View(aspNetRole);
+        }
+
+        [HttpPost, ActionName("DeleteRole")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed2(int id)
+        {
+            repository.Delete(id);
+            repository.Save();
+            return RedirectToAction("Roles");
+        }
         #endregion
 
     }

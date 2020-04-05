@@ -331,9 +331,13 @@
     <Content Include="Views\Dashboard\Browse.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
     <Content Include="Views\Administration\Dashboard.cshtml" />
-    <Content Include="Views\Administration\UsersList.cshtml" />
+    <Content Include="Views\Administration\Users.cshtml" />
     <Content Include="Views\Administration\DeleteUser.cshtml" />
     <Content Include="Views\Administration\EditUser.cshtml" />
+    <Content Include="Views\Administration\Roles.cshtml" />
+    <Content Include="Views\Administration\NewRole.cshtml" />
+    <Content Include="Views\Administration\EditRole.cshtml" />
+    <Content Include="Views\Administration\DeleteRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
