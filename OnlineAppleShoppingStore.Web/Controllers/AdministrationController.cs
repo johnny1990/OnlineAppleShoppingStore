@@ -10,16 +10,19 @@ using System.Web.Mvc;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class AdministrationController : Controller
     {
         private readonly IUsersRepository repository;
         private readonly IRolesRepository repository_R;
+        private readonly IUserRolesRepository repository_U;
 
-        public AdministrationController(IUsersRepository objIrepository, IRolesRepository objIrepository_R)
+        public AdministrationController(IUsersRepository objIrepository, IRolesRepository objIrepository_R,
+            IUserRolesRepository objIRepository_U)
         {
             repository = objIrepository;
             repository_R = objIrepository_R;
+            repository_U = objIRepository_U;
         }
 
         public ActionResult Dashboard()
@@ -173,5 +176,12 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
         #endregion
 
+        #region UsersRoles
+        [HttpGet]
+        public ActionResult UserRoles()
+        {
+            return View(repository_U.All.ToList());
+        }
+        #endregion 
     }
 }

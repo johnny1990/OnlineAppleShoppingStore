@@ -51,6 +51,7 @@
     <Compile Include="IProductsOrderedRepository.cs" />
     <Compile Include="IProductsRepository.cs" />
     <Compile Include="IRolesRepository.cs" />
+    <Compile Include="IUserRolesRepository.cs" />
     <Compile Include="IUsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
