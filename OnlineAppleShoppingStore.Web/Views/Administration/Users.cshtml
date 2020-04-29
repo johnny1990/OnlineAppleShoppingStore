@@ -6,7 +6,7 @@
     <h2>UsersList</h2>
 
     <p>
-        @Html.ActionLink("Create New", "NewUser")
+        @*@Html.ActionLink("Create New", "NewUser")*@
     </p>
     <table class="table">
         <tr>
@@ -84,11 +84,13 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
-                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
                     @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
                 </td>
             </tr>
         }
 
     </table>
+
+    @*<iframe src="/ProductsController/Index?WebForm1.aspx" width="1000" height="400">
+    </iframe>*@
 

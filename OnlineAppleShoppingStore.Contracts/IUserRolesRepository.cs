@@ -10,7 +10,7 @@ namespace OnlineAppleShoppingStore.Contracts
     public interface IUserRolesRepository : IDisposable
     {
         IQueryable<AspNetUserRole> All { get; }
-        AspNetUserRole Find(int id);
+        AspNetUserRole Find(int? id);
         void Insert(AspNetUserRole role);
         void Update(AspNetUserRole role);
         void Delete(int id);

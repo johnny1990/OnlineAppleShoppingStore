@@ -182,6 +182,78 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             return View(repository_U.All.ToList());
         }
+
+        [HttpGet]
+        public ActionResult NewUserRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewUserRole([Bind(Include = "UserId,RoleId")] AspNetUserRole aspNetUserRole)
+        {
+            if (ModelState.IsValid)
+            {
+                repository_U.Insert(aspNetUserRole);
+                repository_U.Save();
+                return RedirectToAction("UserRoles");
+            }
+            return View(aspNetUserRole);
+       }
+
+        [HttpGet]
+        public ActionResult EditUserRole(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AspNetUserRole aspNetUserRole = repository_U.Find(id);
+            if (aspNetUserRole == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.RoleId = new SelectList(repository_U.All, "Id", "RoleId", aspNetUserRole.RoleId);
+            ViewBag.UserId = new SelectList(repository_U.All, "Id", "UserId", aspNetUserRole.UserId);
+            return View(aspNetUserRole);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUserRole([Bind(Include = "Id,UserId,RoleId")] AspNetUserRole aspNetUserRole)
+        {          
+            if (ModelState.IsValid)
+            {
+                repository_U.Update(aspNetUserRole);
+                repository_U.Save();
+                return RedirectToAction("userRoles");
+            }
+            return View(aspNetUserRole);
+        }
+
+        public ActionResult DeleteUserRole(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AspNetUserRole aspNetUserRole = repository_U.Find(id);
+            if (aspNetUserRole == null)
+            {
+                return HttpNotFound();
+            }
+            return View(aspNetUserRole);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteUserRoleConfirmed(int id)
+        {
+            repository_U.Delete(id);
+            repository_U.Save();
+            return RedirectToAction("UserRoles");
+        }       
         #endregion 
     }
 }

@@ -33,7 +33,7 @@ namespace OnlineAppleShoppingStore.Repositories
             _db.Dispose();
         }
 
-        public AspNetUserRole Find(int id)
+        public AspNetUserRole Find(int? id)
         {
             AspNetUserRole role = new AspNetUserRole();
             role = _db.AspNetUserRoles.Where(p => p.Id == id).FirstOrDefault();

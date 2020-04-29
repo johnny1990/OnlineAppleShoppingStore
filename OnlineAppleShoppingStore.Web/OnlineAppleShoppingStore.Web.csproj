@@ -339,6 +339,9 @@
     <Content Include="Views\Administration\EditRole.cshtml" />
     <Content Include="Views\Administration\DeleteRole.cshtml" />
     <Content Include="Views\Administration\UserRoles.cshtml" />
+    <Content Include="Views\Administration\NewUserRole.cshtml" />
+    <Content Include="Views\Administration\EditUserRole.cshtml" />
+    <Content Include="Views\Administration\DeleteUserRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
