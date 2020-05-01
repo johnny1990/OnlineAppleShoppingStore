@@ -34,6 +34,7 @@
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Store", "Index", "Home")</li>
+                    <li>@{Html.RenderAction("Summary", "Cart");}</li>
                     <li>@Html.ActionLink("Statistics", "Index", "Statistics")</li>
 
                     <li class="dropdown">
@@ -47,7 +48,7 @@
                     <li>@Html.ActionLink("Feedback", "Feedback", "Home")</li>
 
 
-                    
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")

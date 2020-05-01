@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -21,19 +22,18 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult OrdersReport()
+        public ActionResult OrdersReport(int? page)
         {
             try
             {
-                return View(repository.All.ToList());
+                return View(repository.All.ToList().ToPagedList(page ?? 1, 10));
+
             }
             catch (Exception ex)
             {
                 Logger.LogWriter.LogException(ex);
                 return HttpNotFound();
             }
-            
-
         }
 
         [Authorize(Roles = "Administrator")]
