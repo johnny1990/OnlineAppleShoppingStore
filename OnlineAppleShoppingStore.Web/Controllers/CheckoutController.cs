@@ -8,7 +8,6 @@ using System.Web.Mvc;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
-
     [Authorize]
     public class CheckoutController : Controller
     {
@@ -20,6 +19,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View();
         }
 
+        //save ordered products!
         [Authorize(Roles = "Customer, Administrator")]
         [HttpPost]
         public ActionResult Payment([Bind(Include = "Id,FirstName,LastName,Address,City,State,PostalCode,Country,Phone,Email,DateCreated,Amount,CustomerUserName")] Order order)

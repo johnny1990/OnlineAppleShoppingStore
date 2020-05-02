@@ -2,12 +2,12 @@
 @{
     ViewBag.Title = "Categories List";
 }
-<h2>Index</h2>
+<h2 class="text-center">Product categories</h2>
 <p>
     <button type="button" class="btn btn-default">@Html.ActionLink("New category", "Create")</button>
 </p>
-<table class="table">
-    <tr>
+<table class="table" border="1">
+    <tr class="alert-info">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
