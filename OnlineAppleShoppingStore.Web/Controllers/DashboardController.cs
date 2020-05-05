@@ -13,10 +13,12 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     public class DashboardController : Controller
     {
         private readonly ICategoryRepository repository;
+        private readonly IProductsRepository repository_p;
 
-        public DashboardController(ICategoryRepository objIrepository)
+        public DashboardController(ICategoryRepository objIrepository, IProductsRepository objIrepositoryP)
         {
             repository = objIrepository;
+            repository_p = objIrepositoryP;
         }
 
         // GET: Index
@@ -36,19 +38,20 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 }
                 return View(category);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogWriter.LogException(ex);
                 return HttpNotFound();
-            }                        
+            }
         }
 
-        public ActionResult Browse(string cat)
+        [HttpGet]
+        public ActionResult Browse(string Category)
         {
-            var categorie = repository.Alls.Include("Products")
-               .Single(g => g.Name == cat);
+            var category = repository.Alls.Include("Products")
+               .Single(g => g.Name == Category);
 
-            return View(categorie);
+            return View(category);
         }
 
         [ChildActionOnly]
@@ -56,8 +59,14 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         public ActionResult Menu()
         {
             var catagories = repository.All.ToList();
-
             return PartialView(catagories);
+        }
+
+        [HttpGet]
+        public ActionResult ProductDetails(int id)
+        {
+            var item = repository_p.Find(id);
+            return View(item);
         }
     }
 }
