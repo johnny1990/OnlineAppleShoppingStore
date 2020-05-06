@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using RestSharp;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -28,6 +31,8 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 db.Orders.Add(order);
                 db.SaveChanges();
+                SendConfirmationMailOrder(order.FirstName, "Your Order: " + order.Id, order.ToString(), order.Email);
+
                 return RedirectToAction("Complete", new { id = order.Id });
             }
 
@@ -49,6 +54,12 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 return View("Error");
             }
+        }
+
+        //to be implemented!!!!!!
+        private static RestResponse SendConfirmationMailOrder(String toCustomerName, String subject, String body, String destination)
+        {         
+            return null;
         }
     }
 }
