@@ -14,11 +14,14 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     {
         private readonly IOrdersRepository repository;
         private readonly IProductsOrderedRepository repository_o;
+        private readonly ICartsRepository repository_c;
 
-        public ReportsController(IOrdersRepository objIrepository, IProductsOrderedRepository objIrepository_o)
+        public ReportsController(IOrdersRepository objIrepository, IProductsOrderedRepository objIrepository_o,
+            ICartsRepository objIrepository_c)
         {
             repository = objIrepository;
             repository_o = objIrepository_o;
+            repository_c = objIrepository_c;
         }
 
         [Authorize(Roles = "Administrator")]
@@ -47,8 +50,21 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 Logger.LogWriter.LogException(ex);
                 return HttpNotFound();
+            }           
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult CartProductsReport(int? page)
+        {
+            try
+            {
+                return View(repository_c.All.ToList().ToPagedList(page ?? 1, 10));
             }
-            
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
     }
 }
