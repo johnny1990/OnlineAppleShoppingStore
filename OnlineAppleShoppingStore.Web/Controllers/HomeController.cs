@@ -31,6 +31,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Feedback()
         {
             return View();
@@ -40,22 +41,41 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Feedback(Feedback model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-                var message = new MailMessage();
-                message.To.Add(new MailAddress("name@gmail.com")); 
-                message.Subject = "Your email subject";
-                message.Body = string.Format(body, model.FromName, model.FromEmail, model.FeedBack);
-                message.IsBodyHtml = true;
-                using (var smtp = new SmtpClient())
+                if (ModelState.IsValid)
                 {
-                    smtp.Send(message);
+                    var senderEmail = new MailAddress("mail_address", "Online Apple Shopping Store Feedback");
+                    var receiverEmail = new MailAddress(model.FromEmail, model.FromName);
+                    var password = "password";
+                    var subject = "Feedback notification";
+                    var body = model.FeedBack;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var message = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(message);
+                    }
                     return RedirectToAction("Sent");
                 }
             }
-            return View(model);
-        }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message.ToString();
+            }
+            return RedirectToAction("Sent");
+        }       
 
         public ActionResult Sent()
         {
