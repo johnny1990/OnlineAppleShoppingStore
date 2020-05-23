@@ -7,11 +7,14 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Net;
 using OnlineAppleShoppingStore.Web.Models;
+using OnlineAppleShoppingStore.Entities.Models;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
+
         public ActionResult Index()
         {
             return View();
@@ -39,17 +42,17 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Feedback(Feedback model)
+        public ActionResult Feedback([Bind(Include = "Id,FromName,FromEmail,FeedBack1")] Feedback model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var senderEmail = new MailAddress("mail_address", "Online Apple Shopping Store Feedback");
+                    var senderEmail = new MailAddress("mail", "Online Apple Shopping Store Feedback");
                     var receiverEmail = new MailAddress(model.FromEmail, model.FromName);
                     var password = "password";
                     var subject = "Feedback notification";
-                    var body = model.FeedBack;
+                    var body = model.FeedBack1;
                     var smtp = new SmtpClient
                     {
                         Host = "smtp.gmail.com",
@@ -65,7 +68,9 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                         Body = body
                     })
                     {
-                        smtp.Send(message);
+                            smtp.Send(message);                       
+                            db.Feedbacks.Add(model);
+                            db.SaveChanges();                     
                     }
                     return RedirectToAction("Sent");
                 }

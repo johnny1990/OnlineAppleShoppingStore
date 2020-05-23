@@ -74,6 +74,9 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OnlineAppleShoppingStoreModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,7 +103,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
@@ -114,32 +116,30 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="Models\OnlineAppleShoppingStoreModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OnlineAppleShoppingStoreModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="Models\OnlineAppleShoppingStoreModel.edmx.diagram">
       <DependentUpon>OnlineAppleShoppingStoreModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Models\OnlineAppleShoppingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OnlineAppleShoppingStoreModel.Context.cs</LastGenOutput>
       <DependentUpon>OnlineAppleShoppingStoreModel.edmx</DependentUpon>
+      <LastGenOutput>OnlineAppleShoppingStoreModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\OnlineAppleShoppingStoreModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OnlineAppleShoppingStoreModel.edmx</DependentUpon>
       <LastGenOutput>OnlineAppleShoppingStoreModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

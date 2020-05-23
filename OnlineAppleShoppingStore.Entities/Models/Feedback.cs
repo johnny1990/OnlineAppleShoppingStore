@@ -12,20 +12,16 @@ namespace OnlineAppleShoppingStore.Entities.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
-    public partial class Category
+    public partial class Feedback
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
-        {
-            this.Products = new HashSet<Product>();
-        }
-    
         public int Id { get; set; }
-        [DisplayName("Category")]
-        public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        [Required, Display(Name = "Name")]
+        public string FromName { get; set; }
+        [Required, Display(Name = "Email"), EmailAddress]
+        public string FromEmail { get; set; }
+        [Required, Display(Name = "Feedback")]
+        public string FeedBack1 { get; set; }
     }
 }

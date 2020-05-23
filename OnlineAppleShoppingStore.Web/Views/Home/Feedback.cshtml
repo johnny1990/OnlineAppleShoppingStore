@@ -1,4 +1,4 @@
-﻿@model OnlineAppleShoppingStore.Web.Models.Feedback
+﻿@model OnlineAppleShoppingStore.Entities.Models.Feedback
     @{
         ViewBag.Title = "Feedback page";
     }
@@ -12,22 +12,22 @@
         <div class="form-group">
             @Html.LabelFor(m => m.FromName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.FromName, new { @class = "form-control" })
+                @Html.EditorFor(model => model.FromName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(m => m.FromName)
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.FromEmail, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control" })
+                @Html.EditorFor(model => model.FromEmail, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(m => m.FromEmail)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.FeedBack, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.FeedBack1, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(m => m.FeedBack, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FeedBack)
+                @Html.TextAreaFor(m => m.FeedBack1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FeedBack1)
             </div>
         </div>
         <div class="form-group">
