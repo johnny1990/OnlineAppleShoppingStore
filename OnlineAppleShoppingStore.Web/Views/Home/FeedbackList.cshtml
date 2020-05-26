@@ -1,0 +1,40 @@
+﻿@model IEnumerable<OnlineAppleShoppingStore.Entities.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback List";
+}
+
+ <h2 class="text-center">Feedback List</h2>
+
+<p>
+    @Html.ActionLink("Go to feedback form", "Feedback")
+</p>
+<table class="table" border="1">
+    <tr class="alert-info">
+        <th>
+            @Html.DisplayNameFor(model => model.FromName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeedBack1)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeedBack1)
+            </td>
+        </tr>
+    }
+
+</table>

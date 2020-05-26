@@ -8,12 +8,19 @@ using System.Threading.Tasks;
 using System.Net;
 using OnlineAppleShoppingStore.Web.Models;
 using OnlineAppleShoppingStore.Entities.Models;
+using OnlineAppleShoppingStore.Contracts;
+using Microsoft.AspNet.Identity;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
+        private readonly IFeedbackRepository repository;
+
+        public HomeController(IFeedbackRepository objIrepository)
+        {
+            repository = objIrepository;
+        }
 
         public ActionResult Index()
         {
@@ -69,8 +76,8 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                     })
                     {
                             smtp.Send(message);                       
-                            db.Feedbacks.Add(model);
-                            db.SaveChanges();                     
+                            repository.Insert(model);
+                            repository.Save();                     
                     }
                     return RedirectToAction("Sent");
                 }
@@ -85,6 +92,12 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         public ActionResult Sent()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult FeedbackList()
+        {
+            return View(repository.All.ToList());
         }
     }
 }

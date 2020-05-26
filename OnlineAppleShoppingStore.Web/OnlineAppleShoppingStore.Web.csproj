@@ -346,6 +346,7 @@
     <Content Include="Views\Administration\DeleteUserRole.cshtml" />
     <Content Include="Views\Dashboard\ProductDetails.cshtml" />
     <Content Include="Views\Reports\CartProductsReport.cshtml" />
+    <Content Include="Views\Home\FeedbackList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

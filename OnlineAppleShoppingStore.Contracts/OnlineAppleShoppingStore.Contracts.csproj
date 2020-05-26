@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ICartsRepository.cs" />
     <Compile Include="ICategoryRepository.cs" />
+    <Compile Include="IFeedbackRepository.cs" />
     <Compile Include="IOrdersRepository.cs" />
     <Compile Include="IProductsOrderedRepository.cs" />
     <Compile Include="IProductsRepository.cs" />
