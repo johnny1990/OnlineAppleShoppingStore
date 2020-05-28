@@ -17,6 +17,11 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     {
         private readonly IFeedbackRepository repository;
 
+        public HomeController()
+        {
+
+        }
+
         public HomeController(IFeedbackRepository objIrepository)
         {
             repository = objIrepository;
