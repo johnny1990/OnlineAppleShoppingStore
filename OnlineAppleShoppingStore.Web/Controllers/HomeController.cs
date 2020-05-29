@@ -15,16 +15,24 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IFeedbackRepository repository;
+
+        private readonly IOrdersRepository repository_o;
+        private readonly ICartsRepository repository_c;
+        private readonly IProductsRepository repository_p;
+        private readonly IFeedbackRepository repository_f;
 
         public HomeController()
         {
 
         }
 
-        public HomeController(IFeedbackRepository objIrepository)
+        public HomeController(IFeedbackRepository objIrepository_f, IOrdersRepository objIrepository_o,
+             ICartsRepository objIrepository_c, IProductsRepository objIrepository_p)
         {
-            repository = objIrepository;
+            repository_f = objIrepository_f;
+            repository_o = objIrepository_o;
+            repository_c = objIrepository_c;
+            repository_p = objIrepository_p;
         }
 
         public ActionResult Index()
@@ -81,8 +89,8 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                     })
                     {
                             smtp.Send(message);                       
-                            repository.Insert(model);
-                            repository.Save();                     
+                            repository_f.Insert(model);
+                            repository_f.Save();                     
                     }
                     return RedirectToAction("Sent");
                 }
@@ -100,9 +108,36 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult FeedbackList()
         {
-            return View(repository.All.ToList());
+            return View(repository_f.All.ToList());
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult GeneralStatistics()
+        {   
+            var totalOrders = repository_o.All.Select(p => p.Amount);
+            ViewBag.SumOrders = totalOrders.Sum();
+
+            var nrOrders = repository_o.All.Select(p => p.Id);
+            ViewBag.NrOrders = nrOrders.Count();
+
+            var nrProducts = repository_c.All.Select(p => p.Product);
+            ViewBag.NrProducts = nrProducts.Count();
+
+            var totalQuantity = repository_c.All.Select(p => p.Count);
+            ViewBag.TotalQuantity = totalQuantity.Sum();
+
+            var productsAvailables = repository_p.All.Select(p => p.Id);
+            ViewBag.ProductsSales = productsAvailables.Count();
+
+            var reviews = repository_f.All.Select(p => p.Id);
+            ViewBag.Reviews = reviews.Count();
+
+            return View();
+        }
+            
     }
 }
