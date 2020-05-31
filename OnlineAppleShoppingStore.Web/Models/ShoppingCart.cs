@@ -123,9 +123,10 @@ namespace OnlineAppleShoppingStore.Web.Models
             return total ?? decimal.Zero;
         }
 
-        public int CreateOrder(Order order)
+        public Order CreateOrder(Order order)
         {
             decimal orderTotal = 0;
+            order.ProductsOrdereds = new List<ProductsOrdered>();
 
             var cartItems = GetCartItems();
 
@@ -139,7 +140,7 @@ namespace OnlineAppleShoppingStore.Web.Models
                 };
 
                 orderTotal += (item.Count * item.Product.Price);
-
+                order.ProductsOrdereds.Add(orderedProduct);
                 db.ProductsOrdereds.Add(orderedProduct);
             }
 
@@ -149,7 +150,7 @@ namespace OnlineAppleShoppingStore.Web.Models
 
             EmptyCart();
 
-            return order.Id;
+            return order;
         }
 
         public string GetCartId(HttpContextBase context)

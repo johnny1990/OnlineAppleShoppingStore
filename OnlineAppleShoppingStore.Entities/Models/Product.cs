@@ -11,7 +11,8 @@ namespace OnlineAppleShoppingStore.Entities.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,7 @@ namespace OnlineAppleShoppingStore.Entities.Models
         }
     
         public int Id { get; set; }
+        [DisplayName("Product")]
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }

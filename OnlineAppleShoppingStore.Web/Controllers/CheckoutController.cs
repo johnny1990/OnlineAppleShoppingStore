@@ -22,7 +22,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View();
         }
 
-        //save ordered products!
         [Authorize(Roles = "Customer, Administrator")]
         [HttpPost]
         public ActionResult Payment([Bind(Include = "Id,FirstName,LastName,Address,City,State,PostalCode,Country,Phone,Email,DateCreated,Amount,CustomerUserName")] Order order)
@@ -31,6 +30,10 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 db.Orders.Add(order);
                 db.SaveChanges();
+
+                var cart = ShoppingCart.GetCart(this.HttpContext);
+                order = cart.CreateOrder(order);
+
                 SendConfirmationMailOrder(order.FirstName, "Your Order: " + order.Id, order.ToString(), order.Email);
 
                 return RedirectToAction("Complete", new { id = order.Id });
