@@ -42,15 +42,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         public ActionResult PrintAllReport()
-        {
-            //var cart = ShoppingCart.GetCart(this.HttpContext);
-
-            //var viewModel = new OnlineAppleShoppingStore.Web.Utilities.Cart
-            //{
-            //    CartItems = cart.GetCartItems(),
-            //    CartTotal = cart.GetTotal()
-            //};
-
+        {    
             var report = new Rotativa.ActionAsPdf("Index");
             return report;
         }
