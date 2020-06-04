@@ -1,5 +1,6 @@
 ﻿@using System.Diagnostics.Eventing.Reader
 @using System.Globalization
+@using Microsoft.AspNet.Identity
 @model OnlineAppleShoppingStore.Web.Utilities.Cart
 @{
     ViewBag.Title = "Store Checkout";
@@ -17,7 +18,8 @@
 }
 else
 {
-    <table  border="1">
+    <p>User: @User.Identity.GetUserName()</p>
+    <table border="1">
         <tr>
             <th>
                 Product Name
@@ -70,6 +72,8 @@ else
         </tr>
     </table>
 
+    <p>Time: @DateTime.UtcNow </p>
+
     <div>
         <button type="button" class="btn " id="ContinueShopping" name="ContinueShopping" value=""><a href="~/Dashboard/Index/1">Continue shopping</a></button>
     </div>
@@ -77,7 +81,11 @@ else
     <div>
         <button type="button" class="btn " id="Checkout" name="Checkout" value="">@Html.ActionLink("Checkout", "Payment", "Checkout")</button>
     </div>
-   
+
+    <div>
+        @Html.ActionLink("Save Cart as PDF", "PrintAllReport")
+    </div>
+
 }
 
 

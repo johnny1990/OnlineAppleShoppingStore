@@ -1,6 +1,7 @@
 ﻿using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,22 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             catch (Exception ex)
             {
                 Logger.LogWriter.LogException(ex);
-                return HttpNotFound();//?? to change!!!!!
+                return HttpNotFound();
             }
+        }
+
+        public ActionResult PrintAllReport()
+        {
+            //var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            //var viewModel = new OnlineAppleShoppingStore.Web.Utilities.Cart
+            //{
+            //    CartItems = cart.GetCartItems(),
+            //    CartTotal = cart.GetTotal()
+            //};
+
+            var report = new Rotativa.ActionAsPdf("Index");
+            return report;
         }
 
         [ChildActionOnly]
