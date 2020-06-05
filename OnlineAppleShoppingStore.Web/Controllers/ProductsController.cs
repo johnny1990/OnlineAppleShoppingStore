@@ -32,12 +32,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             try
             {
                 var products = db.Products.Include(p => p.Category);
-
                 return View(products.ToList().ToPagedList(page ?? 1, 10));
-
-                //var products = repository.All.Include(p => p.Category);
-
-                // return View(repository.All.ToList().ToPagedList(page ?? 1, 10));
             }
             catch (Exception ex)
             {
@@ -71,17 +66,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            //if (ModelState.IsValid)
-            //{
-            //    repository.Insert(product);
-            //    repository.Save();
-            //    return RedirectToAction("Index");
-            //}
-
-
-             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
-
-            //ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name", product.CategoryId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -100,20 +85,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
-
-
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Product product = repository.Find(id);
-        //    if (product == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name", product.CategoryId);
-        //    return View(product);
         }
 
         // POST: Products/Edit/5
@@ -133,17 +104,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
 
-
-            //if (ModelState.IsValid)
-            //{
-            //    repository.Update(product);
-            //    repository.Save();
-            //    return RedirectToAction("Index");
-            //}
-
-            //ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name", product.CategoryId);
-            //return View(product);
-
         }
 
         // GET: Products/Delete/5
@@ -160,17 +120,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return HttpNotFound();
             }
             return View(product);
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Product product = repository.Find(id);
-            //if (product == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(product);
         }
 
         // POST: Products/Delete/5
@@ -183,10 +132,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
-
-            //repository.Delete(id);
-            //repository.Save();
-            //return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
