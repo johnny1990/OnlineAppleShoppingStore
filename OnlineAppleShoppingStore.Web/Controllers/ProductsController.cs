@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -9,6 +10,7 @@ using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
 using PagedList;
+using RestSharp;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -47,7 +49,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-          //ViewBag.CategoryId = new SelectList(repository.All, "Id", "Name");
             return View();
         }
 
@@ -132,6 +133,64 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Upload()
+        {
+            DirectoryInfo salesFTPDirectory = null;
+            FileInfo[] files = null;
+
+            try
+            {
+                string salesFTPPath = (Server.MapPath("~/Content/Images/"));
+                salesFTPDirectory = new DirectoryInfo(salesFTPPath);
+                files = salesFTPDirectory.GetFiles();
+            }
+            catch (DirectoryNotFoundException exp)
+            {
+                exp.Message.ToString();
+            }
+            catch (IOException exp)
+            {
+                exp.Message.ToString();
+            }
+
+            files = files.OrderBy(f => f.Name).ToArray();
+            return View(files);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult UploadImage()
+        {
+            string FileName = "";
+            HttpFileCollectionBase files = Request.Files;
+
+            for (int i = 0; i < files.Count; i++)
+            {
+                HttpPostedFileBase file = files[i];
+                string fname;
+
+
+                var supportedTypes = new[] { "jpg", "png"};
+                var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    //
+                }
+                else
+                {
+                string[] Files = file.FileName.Split(new char[] { '\\' });
+                fname = Files[Files.Length - 1];
+               
+                fname = Path.Combine(Server.MapPath("~/Content/Images/"), fname);
+                file.SaveAs(fname);
+                }
+            }
+            ViewBag.FileStatus = "Product image uploaded successfully.";
+            return Json(FileName, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
