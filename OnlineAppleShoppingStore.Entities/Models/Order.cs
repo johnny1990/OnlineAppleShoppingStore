@@ -17,6 +17,7 @@ namespace OnlineAppleShoppingStore.Entities.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
+            this.Customers = new HashSet<Customer>();
             this.ProductsOrdereds = new HashSet<ProductsOrdered>();
         }
     
@@ -34,6 +35,8 @@ namespace OnlineAppleShoppingStore.Entities.Models
         public decimal Amount { get; set; }
         public string CustomerUserName { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductsOrdered> ProductsOrdereds { get; set; }
     }

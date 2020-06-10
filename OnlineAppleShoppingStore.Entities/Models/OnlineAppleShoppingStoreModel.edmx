@@ -27,6 +27,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="160" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="160" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -89,6 +94,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Customers_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Products_dbo_Categories_CategoryId">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -143,6 +162,10 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="Carts" EntitySet="Carts" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_Orders_OrderId" Association="Self.FK_dbo_Customers_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="Self.FK_dbo_Products_dbo_Categories_CategoryId">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
@@ -185,6 +208,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="160" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="160" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Customers_dbo_Orders_OrderId" FromRole="Customers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -212,6 +241,7 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CustomerUserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_dbo_Customers_dbo_Orders_OrderId" FromRole="Orders" ToRole="Customers" />
           <NavigationProperty Name="ProductsOrdereds" Relationship="Self.FK_dbo_ProductsOrdered_dbo_Orders_OrderId" FromRole="Orders" ToRole="ProductsOrdered" />
         </EntityType>
         <EntityType Name="Product">
@@ -267,6 +297,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Customers_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_ProductsOrdered_dbo_Orders_OrderId">
           <End Role="Orders" Type="Self.Order" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -311,6 +355,10 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_Orders_OrderId" Association="Self.FK_dbo_Customers_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_ProductsOrdered_dbo_Orders_OrderId" Association="Self.FK_dbo_ProductsOrdered_dbo_Orders_OrderId">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="ProductsOrdered" EntitySet="ProductsOrdereds" />
@@ -349,6 +397,11 @@
             <EntityTypeMapping TypeName="OnlineAppleShoppingStoreModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
