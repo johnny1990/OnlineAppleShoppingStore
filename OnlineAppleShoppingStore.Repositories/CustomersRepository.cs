@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,11 @@ namespace OnlineAppleShoppingStore.Repositories
         }
 
         public IQueryable<Customer> All
+        {
+            get { return _db.Customers; }
+        }
+
+        public DbQuery<Customer> Alls
         {
             get { return _db.Customers; }
         }
