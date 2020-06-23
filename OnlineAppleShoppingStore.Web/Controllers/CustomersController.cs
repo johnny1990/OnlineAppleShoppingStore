@@ -11,6 +11,7 @@ using OnlineAppleShoppingStore.Entities.Models;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CustomersController : Controller
     {
         private readonly ICustomersRepository repository;
