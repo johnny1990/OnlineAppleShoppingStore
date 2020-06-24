@@ -33,6 +33,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             try
             {
+                ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
                 var products = db.Products.Include(p => p.Category);
                 return View(products.ToList().ToPagedList(page ?? 1, 10));
             }
@@ -40,8 +41,27 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 Logger.LogWriter.LogException(ex);
                 return HttpNotFound();
+            }         
+        }
+
+        //FilterProductByCategory functionality
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Index(int CategoryId, int? page)
+        {   
+            if(CategoryId == 0)
+            {
+                ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+                var products = db.Products.Include(p => p.Category);
+                return View(products.ToList().ToPagedList(page ?? 1, 10));
             }
-           
+            else
+            {
+                ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+                var products = db.Products.Include(p => p.Category).Where(a => a.CategoryId == CategoryId);
+                return View(products.ToList().ToPagedList(page ?? 1, 10));
+            }
+            
         }
 
         // GET: Products/Create

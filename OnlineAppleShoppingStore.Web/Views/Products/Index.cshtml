@@ -7,54 +7,75 @@
 
 <h2 class="text-center">Manage Products</h2>
 
-<p>
-    <button type="button" class="btn btn-default">@Html.ActionLink("New product", "Create")</button>
-    <button type="button" class="btn btn-default">@Html.ActionLink("Upload Image", "Upload")</button>
-
-</p>
-<table class="table" border="1">
-    <tr class="alert-info">
-
-        <th>
-            Category
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().LastUpdated)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
+    @using (Html.BeginForm())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdated)
-            </td>
-            <td>
-                <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button> |
-                <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-            </td>
-        </tr>
+        <table>
+            <tr>
+                <th> <button type="button" class="btn btn-default">@Html.ActionLink("New product", "Create")</button></th>
+                <th> <button type="button" class="btn btn-default">@Html.ActionLink("Upload Image", "Upload")</button></th>
+            </tr>
+            <tr>
+                <th>
+                    <select id="CategoryId" name="CategoryId" class="form-control">
+                        <option value=0>All</option>
+                        @foreach (var item in ViewBag.CategoryId)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </th>
+                <th><input type="submit" class="btn btn-default" value="Filter products by Category" /></th>
+            </tr>                    
+        </table>
+
+   
+        
+
     }
-</table>
-@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+
+    <table class="table" border="1">
+        <tr class="alert-info">
+
+            <th>
+                Category
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LastUpdated)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdated)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button> |
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                </td>
+            </tr>
+        }
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
