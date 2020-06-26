@@ -5,6 +5,8 @@
 @{
     ViewBag.Title = "Store Checkout";
     CultureInfo us = new CultureInfo("en-US");
+
+    int count = 1;
 }
 
 <h3 class="text-center">
@@ -18,7 +20,7 @@
 }
 else
 {
-    <p>User: @User.Identity.GetUserName()</p>
+
     <table border="1">
         <tr>
             <th>
@@ -72,8 +74,6 @@ else
         </tr>
     </table>
 
-    <p>Time: @DateTime.UtcNow </p>
-
     <div>
         <button type="button" class="btn " id="ContinueShopping" name="ContinueShopping" value=""><a href="~/Dashboard/Index/1">Continue shopping</a></button>
     </div>
@@ -86,6 +86,34 @@ else
         @Html.ActionLink("Save Cart as PDF", "PrintAllReport")
     </div>
 
+    <div class="paypaldiv">
+        <form class="paypalform" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+            <div>. </div>
+            <h4>PayPal payment</h4>
+            <div>
+                <input type="text" name="cmd" value="_cart" contenteditable="false">
+                <input type="text" name="upload" value="1" contenteditable="false">
+                <input type="text" name="business" value="jultranet-facilitator@gmail.com" contenteditable="false">
+            </div>
+
+            @foreach (var item in Model.CartItems)
+            {
+                <input type="text" name="item_name_@count" value="@item.Product.Name" contenteditable="false">
+                <input type="text" name="amount_@count" value="@item.Product.Price" contenteditable="false">
+                <input type="text" name="quantity_@count" value="@item.Count" contenteditable="false">count++;
+            }
+
+            <div><input type="text" name="currency_code" value="USD" contenteditable="false"></div>
+            <div>. </div>
+            <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+        </form>
+    </div>
+    <div><a href="#" class="placeorder btn btn-default pull-left">PayPal Checkout</a></div>
+
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/PayPal/Paypal.js"></script>
 }
 
 
