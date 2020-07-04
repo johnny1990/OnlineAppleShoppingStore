@@ -6,6 +6,7 @@
 <h2 class="text-center">Management Dashboard </h2>
 <div>
     <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("LocaltionMap", "Map", "Administration", new { area = "" }, new { @class = "navbar-brand" })</li>
         <li>@Html.ActionLink("Users", "Users", "Administration", new { area = "" }, new { @class = "navbar-brand" })</li>
         <li>@Html.ActionLink("Roles", "Roles", "Administration", new { area = "" }, new { @class = "navbar-brand" })</li>
         <li>@Html.ActionLink("UserRoles", "UserRoles", "Administration", new { area = "" }, new { @class = "navbar-brand" })</li>

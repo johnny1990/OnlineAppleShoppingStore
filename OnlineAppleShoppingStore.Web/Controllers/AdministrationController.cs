@@ -25,8 +25,25 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             repository_U = objIRepository_U;
         }
 
+        [HttpGet]
         public ActionResult Dashboard()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Map()
+        {
+            string mark = "[";
+            mark += "{";
+            mark += string.Format("'title': '{0}',", "");
+            mark += string.Format("'lat': '{0}',", "");
+            mark += string.Format("'lng': '{0}',", "");
+            mark += string.Format("'description': '{0}'", "");
+            mark += "}";
+                
+            mark += "];";
+            ViewBag.Mark = mark;
             return View();
         }
 
