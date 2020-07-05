@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RestSharp;
+using System.Net.Mail;
+using System.Net;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -59,10 +61,49 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             }
         }
 
-        //to be implemented!!!!!!
         private static RestResponse SendConfirmationMailOrder(String toCustomerName, String subject, String body, String destination)
-        {         
-            return null;
+        {   
+            try
+            {
+                if(toCustomerName != null && destination != null)
+                {
+                    var senderEmail = new MailAddress("mail", "Online Apple Shopping Store Order Confirmation");
+                    var receiverEmail = new MailAddress(destination, toCustomerName);
+                    var password = "password";
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var message = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(message);
+                    }
+                }
+
+                RestClient client = new RestClient();
+                RestRequest request = new RestRequest();
+                request.AddParameter("from", "Online Apple Shopping Store Order Confirmation" + " <" + "mail" + ">");
+                request.AddParameter("to", toCustomerName + " <" + destination + ">");
+                request.AddParameter("subject", subject);
+                request.AddParameter("html", body);
+                request.Method = Method.POST;
+                IRestResponse executor = client.Execute(request);
+                return executor as RestResponse;
+            }
+            catch(Exception ex)
+            {
+                 ex.Message.ToString();
+                return null as RestResponse;
+            }
         }
     }
 }
