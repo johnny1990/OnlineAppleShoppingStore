@@ -19,8 +19,18 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
 
         [Authorize(Roles = "Customer, Administrator")]
+        [HttpGet]
         public ActionResult Payment()
         {
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            var viewModel = new OnlineAppleShoppingStore.Web.Utilities.Cart
+            {
+                CartTotal = cart.GetTotal()
+            };
+
+            ViewBag.Amount = viewModel.CartTotal;
+
             return View();
         }
 
