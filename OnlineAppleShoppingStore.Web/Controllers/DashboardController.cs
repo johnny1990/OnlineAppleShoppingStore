@@ -15,6 +15,10 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private readonly ICategoryRepository repository;
         private readonly IProductsRepository repository_p;
 
+        public DashboardController()
+        {
+
+        }
         public DashboardController(ICategoryRepository objIrepository, IProductsRepository objIrepositoryP)
         {
             repository = objIrepository;

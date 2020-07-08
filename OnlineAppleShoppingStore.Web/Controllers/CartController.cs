@@ -15,6 +15,11 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private readonly IProductsRepository repository;
         private readonly ICartsRepository repository_c;
 
+        public CartController()
+        {
+
+        }
+
         public CartController(IProductsRepository objIrepository, ICartsRepository objIrepository_c)
         {
             repository = objIrepository;

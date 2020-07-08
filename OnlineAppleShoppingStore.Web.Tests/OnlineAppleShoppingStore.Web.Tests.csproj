@@ -89,6 +89,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CheckoutControllerTest.cs" />
+    <Compile Include="Controllers\CartControllerTest.cs" />
+    <Compile Include="Controllers\DashboardControllerTest.cs" />
+    <Compile Include="Controllers\ProductsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -103,6 +107,9 @@
       <Project>{345C73DB-FCC4-4420-8742-66824E0A76FD}</Project>
       <Name>OnlineAppleShoppingStore.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
