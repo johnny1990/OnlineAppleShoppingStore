@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStore.Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineAppleShoppingStoreAuth.Entities", "OnlineAppleShoppingStoreAuth.Entities\OnlineAppleShoppingStoreAuth.Entities.csproj", "{7B110F65-D5BB-400B-B533-42CF22DC55E4}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OnlineAppleShoppingStore.Database", "OnlineAppleShoppingStore.Database\OnlineAppleShoppingStore.Database.sqlproj", "{8C652155-6D57-4EFE-A423-4DC0B74143C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,12 @@ Global
 		{7B110F65-D5BB-400B-B533-42CF22DC55E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B110F65-D5BB-400B-B533-42CF22DC55E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B110F65-D5BB-400B-B533-42CF22DC55E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C652155-6D57-4EFE-A423-4DC0B74143C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C652155-6D57-4EFE-A423-4DC0B74143C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C652155-6D57-4EFE-A423-4DC0B74143C4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8C652155-6D57-4EFE-A423-4DC0B74143C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C652155-6D57-4EFE-A423-4DC0B74143C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C652155-6D57-4EFE-A423-4DC0B74143C4}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
