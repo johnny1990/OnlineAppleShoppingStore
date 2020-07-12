@@ -90,7 +90,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.OrderId = new SelectList(repository_o.All, "Id", "FirstName", customer.OrderId);
+            ViewBag.OrderId = new SelectList(repository_o.All, "Id", "Id", customer.OrderId);
             return View(customer);
         }
 
@@ -103,7 +103,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //repository.Alls.Entry(customer).State = EntityState.Modified; to be !!!!!
                 repository.Save();
                 return RedirectToAction("Index");
             }
