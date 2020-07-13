@@ -18,6 +18,7 @@ namespace OnlineAppleShoppingStore.Entities.Models
         public Order()
         {
             this.Customers = new HashSet<Customer>();
+            this.DeliverOrders = new HashSet<DeliverOrder>();
             this.ProductsOrdereds = new HashSet<ProductsOrdered>();
         }
     
@@ -37,6 +38,8 @@ namespace OnlineAppleShoppingStore.Entities.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeliverOrder> DeliverOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductsOrdered> ProductsOrdereds { get; set; }
     }

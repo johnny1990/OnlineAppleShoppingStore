@@ -74,6 +74,9 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DeliverOrder.cs">
+      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
@@ -129,7 +132,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Models\OnlineAppleShoppingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
