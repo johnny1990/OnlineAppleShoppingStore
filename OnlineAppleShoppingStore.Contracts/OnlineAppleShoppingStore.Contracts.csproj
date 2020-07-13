@@ -48,6 +48,7 @@
     <Compile Include="ICartsRepository.cs" />
     <Compile Include="ICategoryRepository.cs" />
     <Compile Include="ICustomersRepository.cs" />
+    <Compile Include="IDeliverOrdersRepository.cs" />
     <Compile Include="IFeedbackRepository.cs" />
     <Compile Include="IOrdersRepository.cs" />
     <Compile Include="IProductsOrderedRepository.cs" />
