@@ -103,6 +103,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                repository.Update(customer);
                 repository.Save();
                 return RedirectToAction("Index");
             }

@@ -201,6 +201,7 @@
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DeliverOrdersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Scripts\Layout\Slider.js" />
     <Content Include="Scripts\LocationMap\Map.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Orders\PopulateOrderDetails.js" />
     <Content Include="Scripts\PayPal\Paypal.js" />
     <Content Include="Scripts\Statistics\BarChart.js" />
     <Content Include="Scripts\Statistics\TestChart.js" />
@@ -368,6 +370,10 @@
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Administration\Map.cshtml" />
+    <Content Include="Views\DeliverOrders\Create.cshtml" />
+    <Content Include="Views\DeliverOrders\Details.cshtml" />
+    <Content Include="Views\DeliverOrders\Edit.cshtml" />
+    <Content Include="Views\DeliverOrders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

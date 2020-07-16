@@ -28,4 +28,12 @@ namespace OnlineAppleShoppingStore.Entities.Models
     
         public virtual Order Order { get; set; }
     }
+
+    public enum Status : int
+    {
+        Ordered,
+        Canceled,
+        InProgress,       
+        Delivered      
+    }
 }
