@@ -84,8 +84,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
 
-
-        // [Authorize(Roles = "Administrator")]
         public ActionResult DeleteUser(string id)
         {
             if (id == null)
@@ -102,7 +100,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         [HttpPost, ActionName("DeleteUser")]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             repository.Delete(id);

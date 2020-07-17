@@ -9,8 +9,8 @@
 <p>
     @Html.ActionLink("NewUserRole", "NewUserRole")
 </p>
-<table class="table">
-    <tr>
+<table class="table" border="1">
+    <tr class="alert-info">
         <th>
             @Html.DisplayNameFor(model => model.UserId)
         </th>
@@ -37,3 +37,7 @@
     }
 
 </table>
+
+<div>
+    @Html.ActionLink("Back to Dashboard", "Dashboard")
+</div>

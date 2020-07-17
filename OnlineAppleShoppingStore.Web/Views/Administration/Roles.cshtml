@@ -8,8 +8,8 @@
 <p>
     @Html.ActionLink("Add New Role", "NewRole")
 </p>
-<table class="table">
-    <tr>
+<table class="table" border="1">
+    <tr class="alert-info">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -24,7 +24,6 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditRole", new { id = item.Id }) |
-                @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
                 @Html.ActionLink("Delete", "DeleteRole", new { id = item.Id })
             </td>
         </tr>
@@ -32,7 +31,11 @@
 
 </table>
 
-<iframe src="/ProductsController/Index?WebForm1.aspx" width="1000" height="400">
-</iframe>
+<div>
+    @Html.ActionLink("Back to Dashboard", "Dashboard")
+</div>
+
+@*<iframe src="/ProductsController/Index?WebForm1.aspx" width="1000" height="400">
+</iframe>*@
 
 
