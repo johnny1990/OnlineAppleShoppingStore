@@ -15,11 +15,11 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly IOrdersRepository repository_o;
         private readonly ICartsRepository repository_c;
         private readonly IProductsRepository repository_p;
         private readonly IFeedbackRepository repository_f;
+        private readonly IDeliverOrdersRepository repository_d;
 
         public HomeController()
         {
@@ -27,12 +27,13 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         public HomeController(IFeedbackRepository objIrepository_f, IOrdersRepository objIrepository_o,
-             ICartsRepository objIrepository_c, IProductsRepository objIrepository_p)
+             ICartsRepository objIrepository_c, IProductsRepository objIrepository_p, IDeliverOrdersRepository objIrepository_d)
         {
             repository_f = objIrepository_f;
             repository_o = objIrepository_o;
             repository_c = objIrepository_c;
             repository_p = objIrepository_p;
+            repository_d = objIrepository_d;
         }
 
         public ActionResult Index()
@@ -117,7 +118,10 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         public ActionResult GeneralStatistics()
-        {   
+        {
+            var nrDelivers = repository_d.All.Where(p => p.Status == "Ordered").Select(p => p.Id);
+            ViewBag.Delivers = nrDelivers.Count();
+
             var totalOrders = repository_o.All.Select(p => p.Amount);
             ViewBag.SumOrders = totalOrders.Sum();
 
@@ -137,7 +141,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             ViewBag.Reviews = reviews.Count();
 
             return View();
-        }
-            
+        }         
     }
 }

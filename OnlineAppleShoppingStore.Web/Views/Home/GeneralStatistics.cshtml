@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "GeneralStatistics";
+    ViewBag.Title = "General Statistics";
 }
 
 <h2 class="text-center">General Statistics</h2>
@@ -10,60 +10,69 @@
         <div class="row">
             <div class="col">
 
-            <div class="col">
-                <div class="form-group row mb-0">
-                    <label for="Total amount orders" class="col-sm-4 col-form-label font-weight-bold">Total amount orders:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="TotalAmount" name="TotalAmount" value="@ViewBag.SumOrders $" aria-describedby="SiteHelp" placeholder="" readonly>
+                <div class="col">
+                    <div class="form-group row mb-0">
+                        <label for="Orders delivered" class="col-sm-4 col-form-label font-weight-bold">Orders delivered:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Orders delivered" name="Orders delivered" value="@ViewBag.Delivers" aria-describedby="SiteHelp" placeholder="" readonly>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col">
-                <div class="form-group row mb-0">
-                    <label for="Nr orders" class="col-sm-4 col-form-label font-weight-bold">Nr orders:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="Nr orders" name="Nr orders" value="@ViewBag.NrOrders" aria-describedby="SiteHelp" placeholder="" readonly>
+                <div class="col">
+                    <div class="form-group row mb-0">
+                        <label for="Total amount orders" class="col-sm-4 col-form-label font-weight-bold">Total amount orders:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="TotalAmount" name="TotalAmount" value="@ViewBag.SumOrders $" aria-describedby="SiteHelp" placeholder="" readonly>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col">
-                <div class="form-group row mb-0">
-                    <label for="Total number product ordered" class="col-sm-4 col-form-label font-weight-bold">Total number product ordered:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="Total number product ordered" name="Total number product ordered" value="@ViewBag.NrProducts" aria-describedby="SiteHelp" placeholder="" readonly>
+                <div class="col">
+                    <div class="form-group row mb-0">
+                        <label for="Nr orders" class="col-sm-4 col-form-label font-weight-bold">Nr orders:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Nr orders" name="Nr orders" value="@ViewBag.NrOrders" aria-describedby="SiteHelp" placeholder="" readonly>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col">
-                <div class="form-group row mb-0">
-                    <label for="Quantity products ordered" class="col-sm-4 col-form-label font-weight-bold">Quantity products ordered:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="Quantity products ordered" name="Quantity products ordered" value="@ViewBag.TotalQuantity items" aria-describedby="SiteHelp" placeholder="" readonly>
+                <div class="col">
+                    <div class="form-group row mb-0">
+                        <label for="Total number product ordered" class="col-sm-4 col-form-label font-weight-bold">Total number product ordered:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Total number product ordered" name="Total number product ordered" value="@ViewBag.NrProducts" aria-describedby="SiteHelp" placeholder="" readonly>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col">
-                <div class="form-group row mb-0">
-                    <label for="Products available for sale" class="col-sm-4 col-form-label font-weight-bold">Products available for sale:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="Products available for sale" name="Products available for sale:" value="@ViewBag.ProductsSales"  aria-describedby="SiteHelp" placeholder="" readonly>
+                <div class="col">
+                    <div class="form-group row mb-0">
+                        <label for="Quantity products ordered" class="col-sm-4 col-form-label font-weight-bold">Quantity products ordered:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Quantity products ordered" name="Quantity products ordered" value="@ViewBag.TotalQuantity items" aria-describedby="SiteHelp" placeholder="" readonly>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col">
-                <div class="form-group row mb-0">
-                    <label for="Reviews" class="col-sm-4 col-form-label font-weight-bold">Reviews:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="Reviews" name="Reviews" value="@ViewBag.Reviews" aria-describedby="SiteHelp" placeholder="" readonly>
+                <div class="col">
+                    <div class="form-group row mb-0">
+                        <label for="Products available for sale" class="col-sm-4 col-form-label font-weight-bold">Products available for sale:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Products available for sale" name="Products available for sale:" value="@ViewBag.ProductsSales" aria-describedby="SiteHelp" placeholder="" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group row mb-0">
+                        <label for="Reviews" class="col-sm-4 col-form-label font-weight-bold">Reviews:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Reviews" name="Reviews" value="@ViewBag.Reviews" aria-describedby="SiteHelp" placeholder="" readonly>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     </div>
     </div>
