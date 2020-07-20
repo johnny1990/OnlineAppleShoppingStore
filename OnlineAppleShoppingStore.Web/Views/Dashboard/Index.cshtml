@@ -86,7 +86,9 @@
                                 <b>Price:</b> <span>@product.Price USD</span>
                             </p>
                             <p class="text-center">
-                                @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = product.Id }, new { @class = "btn btn-info" })
+                                <button class = "btn btn-default">
+                                @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = product.Id }, new { name = "AddToCart" })
+                                </button>
                                 @Html.ActionLink(Model.Name, "Browse", new { category = Model.Name })
                             </p>
                         </div>
@@ -97,3 +99,6 @@
     </div>
 </div>
 
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/Dashboard/AddProductToCart.js"></script>
+}
