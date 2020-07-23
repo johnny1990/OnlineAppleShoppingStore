@@ -23,27 +23,35 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // GET: Statistics
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
-        {
-            var data = (from orders in repository.All
-                        group orders by orders.DateCreated into dateGroup
-                        select new OrderDateList()
-                        {
-                            Date = dateGroup.Key,
-                            Count = dateGroup.Count()
-                        }).Take(10);
+        {          
+            try
+            {
+                var data = (from orders in repository.All
+                            group orders by orders.DateCreated into dateGroup
+                            select new OrderDateList()
+                            {
+                                Date = dateGroup.Key,
+                                Count = dateGroup.Count()
+                            }).Take(10);
 
-            var allData = (from orders in repository.All
-                           group orders by orders.DateCreated into dateGroup
-                           select new OrderDateList()
-                           {
-                               Date = dateGroup.Key,
-                               Count = dateGroup.Count()
-                           });
+                var allData = (from orders in repository.All
+                               group orders by orders.DateCreated into dateGroup
+                               select new OrderDateList()
+                               {
+                                   Date = dateGroup.Key,
+                                   Count = dateGroup.Count()
+                               });
 
-            s.OrderData = data.ToList();
-            s.OrderDataToday = allData.ToList();
+                s.OrderData = data.ToList();
+                s.OrderDataToday = allData.ToList();
 
-            return View(s);
+                return View(s);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
 
         [Authorize(Roles = "Administrator")]

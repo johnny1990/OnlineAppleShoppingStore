@@ -112,35 +112,51 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult FeedbackList()
         {
-            return View(repository_f.All.ToList());
+            try
+            {
+                return View(repository_f.All.ToList());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         public ActionResult GeneralStatistics()
         {
-            var nrDelivers = repository_d.All.Where(p => p.Status == "Ordered").Select(p => p.Id);
-            ViewBag.Delivers = nrDelivers.Count();
+            try
+            {
+                var nrDelivers = repository_d.All.Where(p => p.Status == "Ordered").Select(p => p.Id);
+                ViewBag.Delivers = nrDelivers.Count();
 
-            var totalOrders = repository_o.All.Select(p => p.Amount);
-            ViewBag.SumOrders = totalOrders.Sum();
+                var totalOrders = repository_o.All.Select(p => p.Amount);
+                ViewBag.SumOrders = totalOrders.Sum();
 
-            var nrOrders = repository_o.All.Select(p => p.Id);
-            ViewBag.NrOrders = nrOrders.Count();
+                var nrOrders = repository_o.All.Select(p => p.Id);
+                ViewBag.NrOrders = nrOrders.Count();
 
-            var nrProducts = repository_c.All.Select(p => p.Product);
-            ViewBag.NrProducts = nrProducts.Count();
+                var nrProducts = repository_c.All.Select(p => p.Product);
+                ViewBag.NrProducts = nrProducts.Count();
 
-            var totalQuantity = repository_c.All.Select(p => p.Count);
-            ViewBag.TotalQuantity = totalQuantity.Sum();
+                var totalQuantity = repository_c.All.Select(p => p.Count);
+                ViewBag.TotalQuantity = totalQuantity.Sum();
 
-            var productsAvailables = repository_p.All.Select(p => p.Id);
-            ViewBag.ProductsSales = productsAvailables.Count();
+                var productsAvailables = repository_p.All.Select(p => p.Id);
+                ViewBag.ProductsSales = productsAvailables.Count();
 
-            var reviews = repository_f.All.Select(p => p.Id);
-            ViewBag.Reviews = reviews.Count();
+                var reviews = repository_f.All.Select(p => p.Id);
+                ViewBag.Reviews = reviews.Count();
 
-            return View();
+                return View();
+            }           
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }         
     }
 }

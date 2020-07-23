@@ -27,8 +27,16 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var customers = repository.Alls.Include(c => c.Order);
-            return View(customers.ToList());
+            try
+            {
+                var customers = repository.Alls.Include(c => c.Order);
+                return View(customers.ToList());
+            }           
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
 
         // GET: Customers/Create

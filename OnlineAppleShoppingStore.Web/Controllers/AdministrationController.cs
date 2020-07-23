@@ -51,7 +51,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [HttpGet]
         public ActionResult Users()
         {
-            return View(repository.All.ToList());
+            try
+            {
+                return View(repository.All.ToList());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
 
   
@@ -112,7 +120,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
       
         public ActionResult Roles()
         {
-            return View(repository_R.All.ToList());
+            try
+            {
+                return View(repository_R.All.ToList());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
 
     
@@ -193,8 +209,16 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         #region UsersRoles
         [HttpGet]
         public ActionResult UserRoles()
-        {
-            return View(repository_U.All.ToList());
+        {           
+            try
+            {
+                return View(repository_U.All.ToList());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
 
         [HttpGet]

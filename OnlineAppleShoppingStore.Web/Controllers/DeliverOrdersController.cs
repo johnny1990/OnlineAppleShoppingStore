@@ -28,8 +28,16 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var deliverOrders = repository.Alls.Include(d => d.Order);
-            return View(deliverOrders.ToList());
+            try
+            {
+                var deliverOrders = repository.Alls.Include(d => d.Order);
+                return View(deliverOrders.ToList());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }
         }
 
         // GET: DeliverOrders/Details/5
