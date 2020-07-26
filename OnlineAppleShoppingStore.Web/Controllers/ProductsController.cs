@@ -10,7 +10,9 @@ using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
 using PagedList;
-using RestSharp;
+using System.Data;
+using ClosedXML.Excel;
+
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -47,6 +49,36 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 Logger.LogWriter.LogException(ex);
                 return HttpNotFound();
             }         
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public FileResult ExportProductsToExcel()
+        {
+            OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[4] { new DataColumn("Name"),
+                                            new DataColumn("Price"),
+                                            new DataColumn("Description"),
+                                            new DataColumn("LastUpdated") });
+
+            var customers = from customer in db.Products.Include(p => p.Category)
+                            select customer;
+
+            foreach (var customer in customers)
+            {
+                dt.Rows.Add(customer.Name, customer.Price, customer.Description, customer.LastUpdated);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ProductsReport_"+DateTime.Now+".xlsx");
+                }
+            }
         }
 
         //FilterProductByCategory functionality
