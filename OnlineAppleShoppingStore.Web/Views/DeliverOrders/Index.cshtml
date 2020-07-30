@@ -6,9 +6,12 @@
 
 <h2>Orders to Deliver list</h2>
 
-<p>
-    @Html.ActionLink("New order", "Create")
-</p>
+@using (Html.BeginForm("ExportOrdersToExcel", "DeliverOrders", FormMethod.Post))
+{
+
+    <p>
+        @Html.ActionLink("New order", "Create")
+    </p>
 <table class="table" border="1">
     <tr class="alert-info">
         <th>
@@ -37,7 +40,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
-        </th>        
+        </th>
         <th></th>
     </tr>
 
@@ -79,3 +82,6 @@
     }
 
 </table>
+
+<input type="image" src="~/Content/Images/excel.jpg" alt="submit" value="ExportOrdersToExcel" width="55" height="48">
+}

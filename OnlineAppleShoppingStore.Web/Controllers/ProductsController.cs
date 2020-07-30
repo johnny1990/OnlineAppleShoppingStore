@@ -62,12 +62,12 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                                             new DataColumn("Description"),
                                             new DataColumn("LastUpdated") });
 
-            var customers = from customer in db.Products.Include(p => p.Category)
-                            select customer;
+            var products = from product in db.Products.Include(p => p.Category)
+                            select product;
 
-            foreach (var customer in customers)
+            foreach (var product in products)
             {
-                dt.Rows.Add(customer.Name, customer.Price, customer.Description, customer.LastUpdated);
+                dt.Rows.Add(product.Name, product.Price, product.Description, product.LastUpdated);
             }
 
             using (XLWorkbook wb = new XLWorkbook())
