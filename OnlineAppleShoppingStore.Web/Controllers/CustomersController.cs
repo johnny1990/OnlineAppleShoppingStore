@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ClosedXML.Excel;
 using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 
@@ -36,6 +38,36 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             {
                 Logger.LogWriter.LogException(ex);
                 return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public FileResult ExportCustomersToExcel()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[5] { new DataColumn("OrderId"),
+                                            new DataColumn("FirstName"),
+                                            new DataColumn("LastName"),
+                                            new DataColumn("Address"),
+                                            new DataColumn("Email")});
+
+            var customers = from customer in repository.All
+                         select customer;
+
+            foreach (var cst in customers)
+            {
+                dt.Rows.Add(cst.OrderId,cst.FirstName, cst.LastName, cst.Address, cst.Email);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "CustomersReport_" + DateTime.Now + ".xlsx");
+                }
             }
         }
 
