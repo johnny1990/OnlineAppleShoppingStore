@@ -72,5 +72,20 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             var item = repository_p.Find(id);
             return View(item);
         }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
+        public ActionResult Supplier()
+        {
+            ViewBag.Supplier = "Apple";
+            ViewBag.Email = "apple@apple.com";
+            ViewBag.Phone = "5454454";
+            ViewBag.Address = "Cupertino";
+            ViewBag.Suburb = "dsdsd";
+            ViewBag.State = "dsdsd";
+            ViewBag.Postcode = "6574";
+
+            return View();
+        }
     }
 }

@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Suppliers";
+}
+
+<h2>Suppliers</h2>
+
+@if (ViewBag.Supplier == null)
+  {
+    <br />
+    <div id="EmptyDataMsg" class="alert alert-info">
+        <strong>Welcome!</strong> There are no suppliers at this time!
+    </div>
+  }
+
+    <div class="list-group">
+        <div class="list-group-item">
+            <img src="@String.Format("{0}{1}.jpg",Url.Content("~/Content/Images/apple.jpg"), @ViewBag.Supplier)" height="70" width="70" alt="@ViewBag.Supplier" /><br />
+            <span>Supplier Name: <b> @ViewBag.Supplier</b></span> <br />
+            <span class="email"> Supplier Email: <b> @ViewBag.Email</b></span> <br />
+            <span class="phone">Phone: <b> @ViewBag.Phone</b></span>
+        </div>
+    </div>
+
+
+

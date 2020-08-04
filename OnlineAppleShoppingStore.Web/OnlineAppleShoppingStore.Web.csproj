@@ -395,6 +395,7 @@
     <Content Include="Views\DeliverOrders\Details.cshtml" />
     <Content Include="Views\DeliverOrders\Edit.cshtml" />
     <Content Include="Views\DeliverOrders\Index.cshtml" />
+    <Content Include="Views\Dashboard\Supplier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
