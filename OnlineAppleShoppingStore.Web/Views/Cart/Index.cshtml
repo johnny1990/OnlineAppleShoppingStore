@@ -9,6 +9,10 @@
     int count = 1;
 }
 
+    <head>
+        <link rel="stylesheet" href="~/Content/Cart/Cart.css">
+    </head>
+
 <h3 class="text-center">
     <span>Your shopping cart:</span>
 </h3>
@@ -20,59 +24,60 @@
 }
 else
 {
+    <div id="dvContent">
+        <table border="1">
+            <tr>
+                <th>
+                    Product Name
+                </th>
+                <th>
+                    Price (each)
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>Sub-total</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr id="row-@item.ProductId">
+                    <td>
+                        @Html.ActionLink(item.Product.Name, "Details", "Products", new { id = item.ProductId }, null)
+                    </td>
+                    <td>
+                        @item.Product.Price
+                    </td>
+                    <td id="item-count-@item.ProductId">
+                        @item.Count
+                    </td>
+                    <td>
+                        @((item.Product.Price * item.Count).ToString("c", us))
+                    </td>
+                    <td>
+                        <div>
+                            <button type="button" class="btn " id="Remove" name="Remove" value="">
+                                <a href="" class="RemoveLink" data-id="@item.ProductId">
+                                    Remove from cart
+                                </a>
+                            </button>
+                        </div>
 
-    <table border="1">
-        <tr>
-            <th>
-                Product Name
-            </th>
-            <th>
-                Price (each)
-            </th>
-            <th>
-                Quantity
-            </th>
-            <th>Sub-total</th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model.CartItems)
-        {
-            <tr id="row-@item.ProductId">
+                    </td>
+                </tr>
+            }
+            <tr>
                 <td>
-                    @Html.ActionLink(item.Product.Name, "Details", "Products", new { id = item.ProductId }, null)
+                    Total
                 </td>
-                <td>
-                    @item.Product.Price
-                </td>
-                <td id="item-count-@item.ProductId">
-                    @item.Count
-                </td>
-                <td>
-                    @((item.Product.Price * item.Count).ToString("c", us))
-                </td>
-                <td>
-                    <div>
-                        <button type="button" class="btn " id="Remove" name="Remove" value="">
-                            <a href="" class="RemoveLink" data-id="@item.ProductId">
-                                Remove from cart
-                            </a>
-                        </button>
-                    </div>
-
+                <td></td>
+                <td></td>
+                <td id="cart-total" class="text-success">
+                    <b>@Model.CartTotal.ToString("C", us)</b>
                 </td>
             </tr>
-        }
-        <tr>
-            <td>
-                Total
-            </td>
-            <td></td>
-            <td></td>
-            <td id="cart-total" class="text-success">
-                <b>@Model.CartTotal.ToString("C", us)</b>
-            </td>
-        </tr>
-    </table>
+        </table>
+    </div>
 
     <div id="cart-status" class="text-info">
     </div>
@@ -85,7 +90,7 @@ else
     </div>
 
     <div>
-        @Html.ActionLink("Save Cart as PDF", "PrintAllReport")
+        <button type="button" id="btnPrint" class="btn btn-default">Print cart</button>
     </div>
 
     <div class="paypaldiv">
@@ -114,9 +119,10 @@ else
 
 }
 
-@section Scripts {
-    <script type="text/javascript" src="~/Scripts/Cart/Cart.js"></script>
-    <script type="text/javascript" src="~/Scripts/PayPal/Paypal.js"></script>
-}
+    @section Scripts {
+        <script type="text/javascript" src="~/Scripts/Cart/Cart.js"></script>
+        <script type="text/javascript" src="~/Scripts/PayPal/Paypal.js"></script>
+        <script type="text/javascript" src="~/Scripts/Cart/Print.js"></script>
+    }
 
 
