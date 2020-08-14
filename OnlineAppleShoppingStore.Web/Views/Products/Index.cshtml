@@ -7,26 +7,24 @@
 
 <h2 class="text-center">Manage Products</h2>
 
-@using (Html.BeginForm("ExportProductsToExcel", "Products", FormMethod.Post))
-{
-    <table>
-        <tr>
-            <th> <button type="button" class="btn btn-default">@Html.ActionLink("New product", "Create")</button></th>
-            <th> <button type="button" class="btn btn-default">@Html.ActionLink("Upload Image", "Upload")</button></th>
-        </tr>
-        <tr>
-            <th>
-                <select id="CategoryId" name="CategoryId" class="form-control">
-                    <option value=0>All</option>
-                    @foreach (var item in ViewBag.CategoryId)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-            </th>
-            <th><input type="submit" class="btn btn-default" value="Filter products by Category" /></th>
-        </tr>
-    </table>
+<table>
+    <tr>
+        <th> <button type="button" class="btn btn-default">@Html.ActionLink("New product", "Create")</button></th>
+        <th> <button type="button" class="btn btn-default">@Html.ActionLink("Upload Image", "Upload")</button></th>
+    </tr>
+    <tr>
+        <th>
+            <select id="CategoryId" name="CategoryId" class="form-control">
+                <option value=0>All</option>
+                @foreach (var item in ViewBag.CategoryId)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </th>
+        <th><input type="submit" class="btn btn-default" value="Filter products by Category" /></th>
+    </tr>
+</table>
 
 <table class="table" border="1">
     <tr class="alert-info">
@@ -74,7 +72,21 @@
     }
 </table>
 
-<input type="image" src="~/Content/Images/excel.jpg" alt="submit" value="ExportProductsToExcel" width="55" height="48">
-}  
+<table>
+    <tr>
+        <th>
+            @using (Html.BeginForm("ExportProductsToExcel", "Products", FormMethod.Post))
+            {
+                <input type="image" src="~/Content/Images/excel.jpg" alt="submit" value="ExportProductsToExcel" width="55" height="48">
+            }
+        </th>
+        <th> 
+            @using (Html.BeginForm("ExportProductsToPdf", "Products", FormMethod.Post)) 
+            { 
+                <input type="image" src="~/Content/Images/pdf.png" alt="submit" value="ExportProductsToPdf" width="55" height="48">
+            }
+        </th>
+    </tr>
+</table>
 
     @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
