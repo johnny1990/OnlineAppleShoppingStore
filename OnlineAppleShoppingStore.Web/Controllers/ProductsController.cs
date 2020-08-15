@@ -18,6 +18,7 @@ using iTextSharp.text.pdf;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : Controller
     {
         private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
@@ -37,7 +38,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         // GET: Products
-        [Authorize(Roles = "Administrator")]
         public ActionResult Index(int? page)
         {
             try
@@ -54,7 +54,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
         public FileResult ExportProductsToExcel()
         {
             OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
@@ -84,7 +83,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
         public FileResult ExportProductsToPdf()
         {
             MemoryStream workStream = new MemoryStream();
@@ -119,7 +117,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         //FilterProductByCategory functionality
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
         public ActionResult Index(int CategoryId, int? page)
         {   
             if(CategoryId == 0)
@@ -138,7 +135,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         // GET: Products/Create
-        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
@@ -150,7 +146,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,Name,Price,Description,LastUpdated,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
@@ -165,7 +160,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         // GET: Products/Edit/5
-        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -186,7 +180,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Name,Price,Description,LastUpdated,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
@@ -201,7 +194,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         // GET: Products/Delete/5
-        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -219,7 +211,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
@@ -229,7 +220,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
         public ActionResult Upload()
         {
             DirectoryInfo salesFTPDirectory = null;
@@ -254,8 +244,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View(files);
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [HttpPost]     
         public ActionResult UploadImage()
         {
             string FileName = "";
