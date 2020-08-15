@@ -5,9 +5,12 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ClosedXML.Excel;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 
@@ -69,6 +72,39 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "CustomersReport_" + DateTime.Now + ".xlsx");
                 }
             }
+        }
+
+        [HttpPost]
+        public FileResult ExportCustomersToPdf()
+        {
+            MemoryStream workStream = new MemoryStream();
+            StringBuilder status = new StringBuilder("");
+            DateTime dTime = DateTime.Now;
+
+            string strPDFFileName = string.Format("CustomersReport_" + dTime.ToString("yyyyMMdd") + "-" + ".pdf");
+            Document doc = new Document();
+            doc.SetMargins(0f, 0f, 0f, 0f);
+
+            PdfPTable tableLayout = new PdfPTable(6);
+            doc.SetMargins(0f, 0f, 0f, 0f);
+
+            string strAttachment = Server.MapPath("~/Downloadss/" + strPDFFileName);
+
+
+            PdfWriter.GetInstance(doc, workStream).CloseStream = false;
+            doc.Open();
+
+            doc.Add(Add_Content_To_PDF(tableLayout));
+
+            doc.Close();
+
+            byte[] byteInfo = workStream.ToArray();
+            workStream.Write(byteInfo, 0, byteInfo.Length);
+            workStream.Position = 0;
+
+
+            return File(workStream, "application/pdf", strPDFFileName);
+
         }
 
         // GET: Customers/Create
@@ -177,6 +213,68 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             repository.Save();
             return RedirectToAction("Index");
         }
+
+        #region Methods ExportPdf
+        protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout)
+        {
+
+            float[] headers = { 50, 24, 45, 35, 50, 50 };
+            tableLayout.SetWidths(headers);
+            tableLayout.WidthPercentage = 100;
+            tableLayout.HeaderRows = 1;
+
+            List<Customer> customers = repository.All.ToList<Customer>();
+
+            tableLayout.AddCell(new PdfPCell(new Phrase("Creating Pdf using ItextSharp", new Font(Font.FontFamily.HELVETICA, 8, 1, new iTextSharp.text.BaseColor(0, 0, 0))))
+            {
+                Colspan = 12,
+                Border = 0,
+                PaddingBottom = 5,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            });
+
+            AddCellToHeader(tableLayout, "Id");
+            AddCellToHeader(tableLayout, "OrderId");
+            AddCellToHeader(tableLayout, "FirstName");
+            AddCellToHeader(tableLayout, "LastName");
+            AddCellToHeader(tableLayout, "Address");
+            AddCellToHeader(tableLayout, "Email");
+
+            foreach (var emp in customers)
+            {
+
+                AddCellToBody(tableLayout, emp.Id.ToString());
+                AddCellToBody(tableLayout, emp.OrderId.ToString());
+                AddCellToBody(tableLayout, emp.FirstName);
+                AddCellToBody(tableLayout, emp.LastName);
+                AddCellToBody(tableLayout, emp.Address);
+                AddCellToBody(tableLayout, emp.Email);
+            }
+
+            return tableLayout;
+        }
+
+        private static void AddCellToHeader(PdfPTable tableLayout, string cellText)
+        {
+
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, iTextSharp.text.BaseColor.YELLOW)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new iTextSharp.text.BaseColor(128, 0, 0)
+            });
+        }
+
+        private static void AddCellToBody(PdfPTable tableLayout, string cellText)
+        {
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, iTextSharp.text.BaseColor.BLACK)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new iTextSharp.text.BaseColor(255, 255, 255)
+            });
+        }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

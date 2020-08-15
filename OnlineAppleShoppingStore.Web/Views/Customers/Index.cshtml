@@ -6,8 +6,6 @@
 
 <h2 class="text-center">Customers List</h2>
 
-@using (Html.BeginForm("ExportCustomersToExcel", "Customers", FormMethod.Post))
-{
     <p>
         @Html.ActionLink("Add New Customer", "Create")
     </p>
@@ -58,5 +56,19 @@
 
     </table>
 
-    <input type="image" src="~/Content/Images/excel.jpg" alt="submit" value="ExportCustomersToExcel" width="55" height="48">
-}
+    <table>
+        <tr>
+            <th>
+                @using (Html.BeginForm("ExportCustomersToExcel", "Customers", FormMethod.Post))
+                {
+                    <input type="image" src="~/Content/Images/excel.jpg" alt="submit" value="ExportCustomersToExcel" width="55" height="48">
+                }
+            </th>
+            <th>
+                @using (Html.BeginForm("ExportCustomersToPdf", "Customers", FormMethod.Post))
+                {
+                    <input type="image" src="~/Content/Images/pdf.png" alt="submit" value="ExportCustomersToPdf" width="55" height="48">
+                }
+            </th>
+        </tr>
+    </table>
