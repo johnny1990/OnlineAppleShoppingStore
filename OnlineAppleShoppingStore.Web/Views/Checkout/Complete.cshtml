@@ -4,6 +4,11 @@
 }
 <h2>Checkout Completed!</h2>
 <p>Thanks for your order! Your order id is: @Model</p>
+
+@if (@Model == 10 || Model == 50 || Model == 100)
+{
+    @Html.Partial("Promotion")
+}
 <p>
     How about shopping for some more music in our
     @Html.ActionLink("Apple Shopping Store", "Index", "Home")
