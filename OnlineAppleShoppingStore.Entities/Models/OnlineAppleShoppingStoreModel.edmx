@@ -48,6 +48,7 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DeliveryDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeliverVia" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -265,6 +266,7 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliverVia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Order" Relationship="Self.FK_dbo_DeliverOrders_dbo_Orders_OrderId" FromRole="DeliverOrders" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Feedback">
@@ -491,6 +493,7 @@
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeliverVia" ColumnName="DeliverVia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

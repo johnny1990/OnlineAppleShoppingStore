@@ -113,7 +113,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                                Name = e.ToString()
                            };
 
+            var deliverVia = from DeliverVia e in Enum.GetValues(typeof(DeliverVia))
+                             select new
+                             {
+                                 ID = (int)e,
+                                 Name = e.ToString()
+                             };
+
             ViewBag.StatusList = new SelectList(statusData, "Name", "Name");
+            ViewBag.DeliverViaList = new SelectList(deliverVia, "Name", "Name");
 
             return View();
         }
@@ -123,7 +131,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status")] DeliverOrder deliverOrder)
+        public ActionResult Create([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status,DeliverVia")] DeliverOrder deliverOrder)
         {
             if (ModelState.IsValid)
             {
@@ -157,7 +165,16 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                                  ID = (int)e,
                                  Name = e.ToString()
                              };
+
+            var deliverVia = from DeliverVia e in Enum.GetValues(typeof(DeliverVia))
+                             select new
+                             {
+                                 ID = (int)e,
+                                 Name = e.ToString()
+                             };
+
             ViewBag.StatusList = new SelectList(statusData, "Name", "Name");
+            ViewBag.DeliverViaList = new SelectList(deliverVia, "Name", "Name");
 
             return View(deliverOrder);
         }
@@ -167,7 +184,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status")] DeliverOrder deliverOrder)
+        public ActionResult Edit([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status,DeliverVia")] DeliverOrder deliverOrder)
         {
             if (ModelState.IsValid)
             {

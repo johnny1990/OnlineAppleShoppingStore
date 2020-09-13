@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a5b93c401c134d5fae5831bf0799c531" Name="Diagram1">
+      <Diagram DiagramId="8edfa1901d844d30a9d423674814929a" Name="Diagram1">
         <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Cart" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Category" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Customer" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.DeliverOrder" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.DeliverOrder" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Feedback" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Order" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineAppleShoppingStoreModel.Product" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />

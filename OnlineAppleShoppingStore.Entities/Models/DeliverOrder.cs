@@ -25,6 +25,7 @@ namespace OnlineAppleShoppingStore.Entities.Models
         public decimal Amount { get; set; }
         public System.DateTime DeliveryDate { get; set; }
         public string Status { get; set; }
+        public string DeliverVia { get; set; }
     
         public virtual Order Order { get; set; }
     }
@@ -33,7 +34,14 @@ namespace OnlineAppleShoppingStore.Entities.Models
     {
         Ordered,
         Canceled,
-        InProgress,       
-        Delivered      
+        InProgress,
+        Delivered
+    }
+
+    public enum DeliverVia : int
+    {
+        Courier,
+        PostMail,
+        Store
     }
 }
