@@ -5,11 +5,16 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
+using Font = iTextSharp.text.Font;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -70,6 +75,38 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "OrdersDeliveredReport_" + DateTime.Now + ".xlsx");
                 }
             }
+        }
+
+        [HttpPost]
+        public FileResult ExportDeliverOrdersToPdf()
+        {
+            MemoryStream workStream = new MemoryStream();
+            StringBuilder status = new StringBuilder("");
+            DateTime dTime = DateTime.Now;
+
+            string strPDFFileName = string.Format("DeliverOrdersReport_" + dTime.ToString("yyyyMMdd") + "-" + ".pdf");
+            iTextSharp.text.Document doc = new iTextSharp.text.Document();
+            doc.SetMargins(0f, 0f, 0f, 0f);
+
+            PdfPTable tableLayout = new PdfPTable(6);
+            doc.SetMargins(0f, 0f, 0f, 0f);
+
+            string strAttachment = Server.MapPath("~/Downloadss/" + strPDFFileName);
+
+
+            PdfWriter.GetInstance(doc, workStream).CloseStream = false;
+            doc.Open();
+
+            doc.Add(Add_Content_To_PDF(tableLayout));
+
+            doc.Close();
+
+            byte[] byteInfo = workStream.ToArray();
+            workStream.Write(byteInfo, 0, byteInfo.Length);
+            workStream.Position = 0;
+
+
+            return File(workStream, "application/pdf", strPDFFileName);
         }
 
         // GET: DeliverOrders/Details/5
@@ -219,6 +256,74 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return Json(ordList, JsonRequestBehavior.AllowGet);
         }
 
+        #region Methods ExportPdf to change!!!!!!!
+        protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout)
+        {
+
+            float[] headers = { 50, 24, 45, 35, 50, 50 };
+            tableLayout.SetWidths(headers);
+            tableLayout.WidthPercentage = 100;
+            tableLayout.HeaderRows = 1;
+
+            List<DeliverOrder> deliverOrders = repository.All.ToList<DeliverOrder>();
+
+            tableLayout.AddCell(new PdfPCell(new Phrase("Creating Pdf using ItextSharp", new Font(Font.FontFamily.HELVETICA, 8, 1, new iTextSharp.text.BaseColor(0, 0, 0))))
+            {
+                Colspan = 12,
+                Border = 0,
+                PaddingBottom = 5,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            });
+
+            AddCellToHeader(tableLayout, "Id");
+            AddCellToHeader(tableLayout, "OrderId");
+            AddCellToHeader(tableLayout, "FirstName");
+            AddCellToHeader(tableLayout, "LastName");
+            AddCellToHeader(tableLayout, "Address");
+            AddCellToHeader(tableLayout, "Email");
+            AddCellToHeader(tableLayout, "Amount");
+            AddCellToHeader(tableLayout, "DeliveryDate");
+            AddCellToHeader(tableLayout, "Status");
+            AddCellToHeader(tableLayout, "DeliverVia");
+
+            foreach (var dor in deliverOrders)
+            {
+                AddCellToBody(tableLayout, dor.Id.ToString());
+                AddCellToBody(tableLayout, dor.OrderId.ToString());
+                AddCellToBody(tableLayout, dor.FirstName);
+                AddCellToBody(tableLayout, dor.LastName);
+                AddCellToBody(tableLayout, dor.Address);
+                AddCellToBody(tableLayout, dor.Email);
+                AddCellToBody(tableLayout, dor.Amount.ToString());
+                AddCellToBody(tableLayout, dor.DeliveryDate.ToString());
+                AddCellToBody(tableLayout, dor.Status);
+                AddCellToBody(tableLayout, dor.DeliverVia);                         
+            }
+
+            return tableLayout;
+        }
+
+        private static void AddCellToHeader(PdfPTable tableLayout, string cellText)
+        {
+
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, iTextSharp.text.BaseColor.YELLOW)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new iTextSharp.text.BaseColor(128, 0, 0)
+            });
+        }
+
+        private static void AddCellToBody(PdfPTable tableLayout, string cellText)
+        {
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, iTextSharp.text.BaseColor.BLACK)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new iTextSharp.text.BaseColor(255, 255, 255)
+            });
+        }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
