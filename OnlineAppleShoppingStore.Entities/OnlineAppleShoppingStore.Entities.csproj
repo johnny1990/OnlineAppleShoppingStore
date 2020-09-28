@@ -71,6 +71,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
@@ -102,6 +105,9 @@
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductsOrdered.cs">
+      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Topic.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
