@@ -37,18 +37,18 @@
                     <li>@Html.ActionLink("DeliverOrders", "Index", "DeliverOrders")</li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Reports <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Statistics & Reports <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Orders", "OrdersReport", "Reports", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Statistics", "Index", "Statistics", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("General Informations", "GeneralStatistics", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Orders report", "OrdersReport", "Reports", new { area = "" }, new { @class = "navbar-brand" })</li>
                             <li>@Html.ActionLink("Ordered products", "ProductsOrderedReport", "Reports", new { area = "" }, new { @class = "navbar-brand" })</li>
                             <li>@Html.ActionLink("Cart products report", "CartProductsReport", "Reports", new { area = "" }, new { @class = "navbar-brand" })</li>
                         </ul>
                     </li>
-
-                    <li>@Html.ActionLink("Statistics", "Index", "Statistics")</li>
+                    
                     <li>@Html.ActionLink("Feedback", "Feedback", "Home")</li>
-                    <li>@Html.ActionLink("General Informations", "GeneralStatistics", "Home")</li>
-
+                    <li>@Html.ActionLink("Forum", "Forum", "Forum")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
