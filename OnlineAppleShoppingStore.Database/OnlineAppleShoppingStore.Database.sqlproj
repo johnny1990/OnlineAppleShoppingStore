@@ -66,5 +66,7 @@
     <None Include="OrdersTable.sql" />
     <None Include="ProductsOrdered.sql" />
     <None Include="DeliverOrdersTable.sql" />
+    <None Include="ForumTable.sql" />
+    <None Include="CommentsTable.sql" />
   </ItemGroup>
 </Project>

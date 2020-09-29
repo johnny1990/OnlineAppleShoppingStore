@@ -22,6 +22,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="45" Nullable="false" />
         </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForumId" Type="int" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,6 +67,14 @@
           <Property Name="FromName" Type="nvarchar" MaxLength="50" />
           <Property Name="FromEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="FeedBack" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Forums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -184,9 +201,11 @@
         <EntityContainer Name="OnlineAppleShoppingStoreModelStoreContainer">
           <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliverOrders" EntityType="Self.DeliverOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forums" EntityType="Self.Forums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsOrdered" EntityType="Self.ProductsOrdered" Schema="dbo" store:Type="Tables" />
@@ -239,6 +258,15 @@
           <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_Categories_CategoryId" FromRole="Categories" ToRole="Products" />
         </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForumId" Type="Int32" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -277,6 +305,14 @@
           <Property Name="FromName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FromEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FeedBack1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Forum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -411,9 +447,11 @@
         <EntityContainer Name="OnlineAppleShoppingStoreEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carts" EntityType="Self.Cart" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="DeliverOrders" EntityType="Self.DeliverOrder" />
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="Forums" EntityType="Self.Forum" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductsOrdereds" EntityType="Self.ProductsOrdered" />
@@ -467,6 +505,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="OnlineAppleShoppingStoreModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ForumId" ColumnName="ForumId" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="OnlineAppleShoppingStoreModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
@@ -504,6 +552,15 @@
                 <ScalarProperty Name="FromName" ColumnName="FromName" />
                 <ScalarProperty Name="FromEmail" ColumnName="FromEmail" />
                 <ScalarProperty Name="FeedBack1" ColumnName="FeedBack" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forums">
+            <EntityTypeMapping TypeName="OnlineAppleShoppingStoreModel.Forum">
+              <MappingFragment StoreEntitySet="Forums">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
