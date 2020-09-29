@@ -22,7 +22,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <EntityType Name="Comments">
+        <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -68,7 +68,7 @@
           <Property Name="FromEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="FeedBack" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Forums">
+        <EntityType Name="Forum">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -114,6 +114,20 @@
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Comment_Forum_ForumId">
+          <End Role="Forum" Type="Self.Forum" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ForumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Carts_dbo_Products_ProductId">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -201,14 +215,18 @@
         <EntityContainer Name="OnlineAppleShoppingStoreModelStoreContainer">
           <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliverOrders" EntityType="Self.DeliverOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Forums" EntityType="Self.Forums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forum" EntityType="Self.Forum" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsOrdered" EntityType="Self.ProductsOrdered" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comment_Forum_ForumId" Association="Self.FK_Comment_Forum_ForumId">
+            <End Role="Forum" EntitySet="Forum" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Carts_dbo_Products_ProductId" Association="Self.FK_dbo_Carts_dbo_Products_ProductId">
             <End Role="Products" EntitySet="Products" />
             <End Role="Carts" EntitySet="Carts" />
@@ -266,6 +284,7 @@
           <Property Name="ForumId" Type="Int32" Nullable="false" />
           <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Forum" Relationship="Self.FK_Comment_Forum_ForumId" FromRole="Comment" ToRole="Forum" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -313,6 +332,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Forum_ForumId" FromRole="Forum" ToRole="Comment" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -388,6 +408,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Comment_Forum_ForumId">
+          <End Role="Forum" Type="Self.Forum" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ForumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Customers_dbo_Orders_OrderId">
           <End Role="Orders" Type="Self.Order" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -451,7 +485,7 @@
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="DeliverOrders" EntityType="Self.DeliverOrder" />
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
-          <EntitySet Name="Forums" EntityType="Self.Forum" />
+          <EntitySet Name="Fora" EntityType="Self.Forum" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductsOrdereds" EntityType="Self.ProductsOrdered" />
@@ -462,6 +496,10 @@
           <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="Self.FK_dbo_Products_dbo_Categories_CategoryId">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Forum_ForumId" Association="Self.FK_Comment_Forum_ForumId">
+            <End Role="Forum" EntitySet="Fora" />
+            <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Customers_dbo_Orders_OrderId" Association="Self.FK_dbo_Customers_dbo_Orders_OrderId">
             <End Role="Orders" EntitySet="Orders" />
@@ -507,7 +545,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="OnlineAppleShoppingStoreModel.Comment">
-              <MappingFragment StoreEntitySet="Comments">
+              <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ForumId" ColumnName="ForumId" />
                 <ScalarProperty Name="Body" ColumnName="Body" />
@@ -555,9 +593,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Forums">
+          <EntitySetMapping Name="Fora">
             <EntityTypeMapping TypeName="OnlineAppleShoppingStoreModel.Forum">
-              <MappingFragment StoreEntitySet="Forums">
+              <MappingFragment StoreEntitySet="Forum">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
