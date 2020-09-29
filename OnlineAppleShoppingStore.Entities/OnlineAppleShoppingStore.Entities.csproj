@@ -71,9 +71,6 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Comment.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
@@ -107,9 +104,6 @@
     <Compile Include="Models\ProductsOrdered.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Topic.cs">
-      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +132,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Models\OnlineAppleShoppingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
