@@ -47,9 +47,11 @@
   <ItemGroup>
     <Compile Include="ICartsRepository.cs" />
     <Compile Include="ICategoryRepository.cs" />
+    <Compile Include="ICommentsRepository.cs" />
     <Compile Include="ICustomersRepository.cs" />
     <Compile Include="IDeliverOrdersRepository.cs" />
     <Compile Include="IFeedbackRepository.cs" />
+    <Compile Include="IForumsRepository.cs" />
     <Compile Include="IOrdersRepository.cs" />
     <Compile Include="IProductsOrderedRepository.cs" />
     <Compile Include="IProductsRepository.cs" />
