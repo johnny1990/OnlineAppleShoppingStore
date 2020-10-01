@@ -220,9 +220,11 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DeliverOrdersController.cs" />
+    <Compile Include="Controllers\ForumsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -407,6 +409,15 @@
     <Content Include="Views\DeliverOrders\Index.cshtml" />
     <Content Include="Views\Dashboard\Supplier.cshtml" />
     <Content Include="Views\Checkout\Promotion.cshtml" />
+    <Content Include="Views\Forums\Create.cshtml" />
+    <Content Include="Views\Forums\Delete.cshtml" />
+    <Content Include="Views\Forums\Edit.cshtml" />
+    <Content Include="Views\Forums\Index.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Forums\CommentsByForum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

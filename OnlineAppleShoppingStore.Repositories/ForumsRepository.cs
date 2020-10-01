@@ -19,13 +19,13 @@ namespace OnlineAppleShoppingStore.Repositories
 
         public IQueryable<Forum> All
         {
-            get { return _db.Forums; }
+            get { return _db.Fora; }
         }
 
         public void Delete(int id)
         {
-            var f = _db.Forums.Find(id);
-            _db.Forums.Remove(f);
+            var f = _db.Fora.Find(id);
+            _db.Fora.Remove(f);
         }
 
         public void Dispose()
@@ -36,13 +36,13 @@ namespace OnlineAppleShoppingStore.Repositories
         public Forum Find(int? id)
         {
             Forum obj = new Forum();
-            obj = _db.Forums.Where(p => p.Id == id).FirstOrDefault();
+            obj = _db.Fora.Where(p => p.Id == id).FirstOrDefault();
             return obj;
         }
 
         public void Insert(Forum f)
         {
-            _db.Forums.Add(f);
+            _db.Fora.Add(f);
         }
 
         public void Save()

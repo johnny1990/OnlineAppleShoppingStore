@@ -1,0 +1,39 @@
+﻿@model IEnumerable<OnlineAppleShoppingStore.Entities.Models.Comment>
+@{
+    ViewBag.Title = "CommentsByForum";
+}
+
+<h2 class="text-center alert-success">Comments list for forum: @ViewBag.Forum</h2>
+
+<table class="table" border="1">
+    <tr class="alert-info">
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Forum.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Forum.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Add new comment to forum", "Create","Comments")
+

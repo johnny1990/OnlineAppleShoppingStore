@@ -1,0 +1,48 @@
+﻿@model IEnumerable<OnlineAppleShoppingStore.Entities.Models.Forum>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Create new forum</h2>
+
+    @if (User.Identity.Name == "admin@admin.com")
+    { 
+    <p>
+        @Html.ActionLink("New forum", "Create")
+    </p>
+    }
+<table class="table" border="1">
+    <tr class="alert-info">
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @if (User.Identity.Name == "admin@admin.com")
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink(" ", " ", " ")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+
+                @Html.ActionLink("View comments", "CommentsByForum", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
