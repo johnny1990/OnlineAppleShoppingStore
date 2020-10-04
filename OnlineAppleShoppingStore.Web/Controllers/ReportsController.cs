@@ -10,6 +10,9 @@ using PagedList;
 using System.Data;
 using ClosedXML.Excel;
 using System.IO;
+using System.Text;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -159,6 +162,104 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ProductsInCartReport_" + DateTime.Now + ".xlsx");
                 }
             }
+        }
+        #endregion
+
+        #region ExportOrdersToPdf
+        [HttpPost]
+        public FileResult ExportOrdersToPdf()
+        {
+            MemoryStream workStream = new MemoryStream();
+            StringBuilder status = new StringBuilder("");
+            DateTime dTime = DateTime.Now;
+
+            string strPDFFileName = string.Format("OrdersReport_" + dTime.ToString("yyyyMMdd") + "-" + ".pdf");
+            iTextSharp.text.Document doc = new iTextSharp.text.Document();
+            doc.SetMargins(0f, 0f, 0f, 0f);
+
+            PdfPTable tableLayout = new PdfPTable(6);
+            doc.SetMargins(0f, 0f, 0f, 0f);
+
+            string strAttachment = Server.MapPath("~/Downloads/" + strPDFFileName);
+
+
+            PdfWriter.GetInstance(doc, workStream).CloseStream = false;
+            doc.Open();
+
+            doc.Add(Add_Content_To_PDF(tableLayout));
+
+            doc.Close();
+
+            byte[] byteInfo = workStream.ToArray();
+            workStream.Write(byteInfo, 0, byteInfo.Length);
+            workStream.Position = 0;
+
+
+            return File(workStream, "application/pdf", strPDFFileName);
+        }
+
+        protected PdfPTable Add_Content_To_PDF(PdfPTable tableLayout)
+        {
+
+            float[] headers = { 50, 24, 45, 35, 50, 50 };
+            tableLayout.SetWidths(headers);
+            tableLayout.WidthPercentage = 100;
+            tableLayout.HeaderRows = 1;
+
+            List<Order> deliverOrders = repository.All.ToList<Order>();
+
+            tableLayout.AddCell(new PdfPCell(new Phrase("Creating Pdf using ItextSharp", new Font(Font.FontFamily.HELVETICA, 8, 1, new iTextSharp.text.BaseColor(0, 0, 0))))
+            {
+                Colspan = 12,
+                Border = 0,
+                PaddingBottom = 5,
+                HorizontalAlignment = Element.ALIGN_CENTER
+            });
+
+            AddCellToHeader(tableLayout, "Id");
+            AddCellToHeader(tableLayout, "FirstName");
+            AddCellToHeader(tableLayout, "LastName");
+            AddCellToHeader(tableLayout, "Address");
+            AddCellToHeader(tableLayout, "City");
+            AddCellToHeader(tableLayout, "Email");
+            AddCellToHeader(tableLayout, "Phone");
+            AddCellToHeader(tableLayout, "DateCreated");
+
+            foreach (var dor in deliverOrders)
+            {
+                AddCellToBody(tableLayout, dor.Id.ToString());
+                AddCellToBody(tableLayout, dor.FirstName);
+                AddCellToBody(tableLayout, dor.LastName);
+                AddCellToBody(tableLayout, dor.Address);
+                AddCellToBody(tableLayout, dor.City);
+                AddCellToBody(tableLayout, dor.Email);
+                AddCellToBody(tableLayout, dor.Phone);
+                AddCellToBody(tableLayout, dor.Amount.ToString());
+                AddCellToBody(tableLayout, dor.DateCreated.ToString());
+            }
+
+            return tableLayout;
+        }
+
+        private static void AddCellToHeader(PdfPTable tableLayout, string cellText)
+        {
+
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, iTextSharp.text.BaseColor.YELLOW)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new iTextSharp.text.BaseColor(128, 0, 0)
+            });
+        }
+
+        private static void AddCellToBody(PdfPTable tableLayout, string cellText)
+        {
+            tableLayout.AddCell(new PdfPCell(new Phrase(cellText, new Font(Font.FontFamily.HELVETICA, 8, 1, iTextSharp.text.BaseColor.BLACK)))
+            {
+                HorizontalAlignment = Element.ALIGN_LEFT,
+                Padding = 5,
+                BackgroundColor = new iTextSharp.text.BaseColor(255, 255, 255)
+            });
         }
         #endregion
     }

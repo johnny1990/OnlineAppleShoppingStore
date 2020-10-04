@@ -97,8 +97,20 @@
     </table>
     @Html.PagedListPager(Model, Page => Url.Action("OrdersReport", new { Page }))
 
-
-
-    <input type="image" src="~/Content/Images/excel.jpg" alt="submit" value="ExportOrdersToExcel" width="55" height="48">
-
+    <table>
+        <tr>
+            <th>
+                @using (Html.BeginForm("ExportOrdersToExcel", "Reports", FormMethod.Post))
+                {
+                    <input type="image" src="~/Content/Images/excel.jpg" alt="submit" value="ExportOrdersToExcel" width="55" height="48">
+                }
+            </th>
+            <th>
+                @using (Html.BeginForm("ExportOrdersToPdf", "Reports", FormMethod.Post))
+                {
+                    <input type="image" src="~/Content/Images/pdf.png" alt="submit" value="ExportOrdersToPdf" width="55" height="48">
+                }
+            </th>
+        </tr>
+    </table>
 }
