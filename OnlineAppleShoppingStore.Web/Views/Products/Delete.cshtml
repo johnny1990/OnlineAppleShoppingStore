@@ -8,6 +8,9 @@
     <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dd>
+            <input id="hidId" name="hidId" type="hidden" value="@ViewBag.ProductId" />
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Category.Name)
         </dt>
@@ -43,9 +46,13 @@
     {
         @Html.AntiForgeryToken()
 
-<div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-danger" /> |
-    <button type="button" class="btn btn-default"> @Html.ActionLink("Back to List", "Index")</button>
-</div>
+        <div class="form-actions no-color">
+            <input type="button" id="btnDelete" value="Delete" class="btn btn-default" />    |
+            <button type="button" class="btn btn-default"> @Html.ActionLink("Back to List", "Index")</button>
+        </div>
     }
 </div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/Products/DeleteProduct.js"></script>
+}

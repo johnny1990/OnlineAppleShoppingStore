@@ -320,6 +320,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Orders\PopulateOrderDetails.js" />
     <Content Include="Scripts\PayPal\Paypal.js" />
+    <Content Include="Scripts\Products\DeleteProduct.js" />
+    <Content Include="Scripts\Products\InsertProduct.js" />
+    <Content Include="Scripts\Products\UpdateProduct.js" />
     <Content Include="Scripts\Statistics\BarChart.js" />
     <Content Include="Scripts\Statistics\TestChart.js" />
     <Content Include="Scripts\Uploads\UploadImage.js" />
