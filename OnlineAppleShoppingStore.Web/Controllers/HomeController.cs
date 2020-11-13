@@ -10,6 +10,8 @@ using OnlineAppleShoppingStore.Web.Models;
 using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Contracts;
 using Microsoft.AspNet.Identity;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -21,6 +23,9 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private readonly IFeedbackRepository repository_f;
         private readonly IDeliverOrdersRepository repository_d;
 
+        Uri baseAddress = new Uri("https://localhost:44328/api");
+        HttpClient client;
+
         public HomeController()
         {
 
@@ -29,6 +34,9 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         public HomeController(IFeedbackRepository objIrepository_f, IOrdersRepository objIrepository_o,
              ICartsRepository objIrepository_c, IProductsRepository objIrepository_p, IDeliverOrdersRepository objIrepository_d)
         {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+
             repository_f = objIrepository_f;
             repository_o = objIrepository_o;
             repository_c = objIrepository_c;
@@ -114,7 +122,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             try
             {
-                return View(repository_f.All.ToList());
+                List<Feedback> modelList = new List<Feedback>();
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/FeedbackApi/GetFeedbacks").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    modelList = JsonConvert.DeserializeObject<List<Feedback>>(data);
+                }
+
+                return View(modelList.ToList());
             }
             catch (Exception ex)
             {
