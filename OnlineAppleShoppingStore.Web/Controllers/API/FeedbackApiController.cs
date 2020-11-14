@@ -16,8 +16,31 @@ namespace OnlineAppleShoppingStore.Web.Controllers.API
         [HttpGet]
         public HttpResponseMessage GetFeedbacks()
         {
-            var result = db.Feedbacks.ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, result);
+            try
+            {
+                var result = db.Feedbacks.ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Error!");
+            }
+            
+        }
+
+        [HttpPost]
+        public IHttpActionResult InsertFeedback([FromBody] Feedback model)
+        {
+            try
+            {
+                db.Feedbacks.Add(model);
+                db.SaveChanges();
+                return Created("Created succesfully", model);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
         }
 
     }

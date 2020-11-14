@@ -12,6 +12,7 @@ using OnlineAppleShoppingStore.Contracts;
 using Microsoft.AspNet.Identity;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -99,7 +100,20 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                     {
                             smtp.Send(message);                       
                             repository_f.Insert(model);
-                            repository_f.Save();                     
+                            repository_f.Save();
+
+                        //
+
+                        string data = JsonConvert.SerializeObject(model);
+                        StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+                        HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/FeedbackApi/InsertFeedback", content).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        //return View();
+                        //
                     }
                     return RedirectToAction("Sent");
                 }
