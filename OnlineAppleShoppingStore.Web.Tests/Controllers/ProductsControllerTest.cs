@@ -28,13 +28,13 @@ namespace OnlineAppleShoppingStore.Web.Tests.Controllers
             Assert.AreEqual(result, result);
         }
 
-        //[TestMethod]
-        //public void Edit()
-        //{
-        //    ProductsController controller = new ProductsController();
-        //    ViewResult result = controller.Edit() as ViewResult;
-        //    Assert.AreEqual(result, result);
-        //}
+        [TestMethod]
+        public void Edit()
+        {
+            ProductsController controller = new ProductsController();
+            ViewResult result = controller.Edit(1) as ViewResult;
+            Assert.AreEqual(result, result);
+        }
 
         [TestMethod]
         public void Delete()

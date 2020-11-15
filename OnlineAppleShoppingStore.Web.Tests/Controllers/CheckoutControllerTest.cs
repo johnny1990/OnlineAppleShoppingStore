@@ -17,10 +17,10 @@ namespace OnlineAppleShoppingStore.Web.Tests.Controllers
         }
 
         [TestMethod]
-        public void Complete(int id)
+        public void Complete()
         {
             CheckoutController controller = new CheckoutController();
-            ViewResult result = controller.Complete(id) as ViewResult;
+            ViewResult result = controller.Complete(7) as ViewResult;
             Assert.IsNotNull(result);
         }
     }

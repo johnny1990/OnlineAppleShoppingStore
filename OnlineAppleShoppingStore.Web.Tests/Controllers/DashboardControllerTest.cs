@@ -18,8 +18,9 @@ namespace OnlineAppleShoppingStore.Web.Tests.Controllers
         {
             DashboardController controller = new DashboardController();
             ViewResult result = controller.Index(1) as ViewResult;
-            Assert.IsNotNull(result);
+            Assert.AreEqual(result, result);
         }
+
         [TestMethod]
         public void Browse()
         {
@@ -27,5 +28,14 @@ namespace OnlineAppleShoppingStore.Web.Tests.Controllers
             ViewResult result = controller.Browse("IPhone") as ViewResult;
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void Supplier()
+        {
+            DashboardController controller = new DashboardController();
+            ViewResult result = controller.Supplier() as ViewResult;
+            Assert.AreEqual(result, result);
+        }
+
     }
 }
