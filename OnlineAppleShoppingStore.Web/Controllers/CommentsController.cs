@@ -4,8 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 
@@ -14,91 +17,101 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     [Authorize(Roles = "Administrator, User")]
     public class CommentsController : Controller
     {
-        private OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
 
         private readonly ICommentsRepository repository;
-        private readonly IForumsRepository repository_f;      
+        private readonly IForumsRepository repository_f;
+
+        Uri baseAddress = new Uri("https://localhost:44328/api");
+        HttpClient client;
 
         public CommentsController(ICommentsRepository objIrepository,
             IForumsRepository objIRepository_f)
         {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+
             repository = objIrepository;
             repository_f = objIRepository_f;
         }
 
-        // GET: Comment
+
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Forum);
-            return View(comments.ToList());
+            List<Comment> modelList = new List<Comment>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/CommentsApi/GetComments").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<Comment>>(data);
+            }
+
+            return View(modelList.ToList());
         }
 
-        // GET: Comment/Create
+
         public ActionResult Create()
         {
-            ViewBag.ForumId = new SelectList(db.Fora, "Id", "Title");
+            ViewBag.ForumId = new SelectList(repository_f.All.ToList(), "Id", "Title");
             return View();
         }
 
-        // POST: Comment/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,ForumId,Body,Title")] Comment comment)
         {
-            if (ModelState.IsValid)
+            string data = JsonConvert.SerializeObject(comment);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/CommentsApi/AddComment", content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                db.Comments.Add(comment);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ForumId = new SelectList(db.Fora, "Id", "Description", comment.ForumId);
-            return View(comment);
+            ViewBag.ForumId = new SelectList(repository_f.All.ToList(), "Id", "Description", comment.ForumId);
+            return View();
         }
 
-        // GET: Comment/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
+            Comment comment = repository.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ForumId = new SelectList(db.Fora, "Id", "Title", comment.ForumId);
+            ViewBag.ForumId = new SelectList(repository_f.All.ToList(), "Id", "Title", comment.ForumId);
             return View(comment);
         }
 
-        // POST: Comment/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,ForumId,Body,Title")] Comment comment)
         {
-            if (ModelState.IsValid)
+            string data = JsonConvert.SerializeObject(comment);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/CommentsApi/UpdateComment", content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                db.Entry(comment).State = EntityState.Modified;
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ForumId = new SelectList(db.Fora, "Id", "Title", comment.ForumId);
+            ViewBag.ForumId = new SelectList(repository_f.All.ToList(), "Id", "Title", comment.ForumId);
+
             return View(comment);
         }
 
-        // GET: Comment/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
+            Comment comment = repository.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -106,14 +119,17 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View(comment);
         }
 
-        // POST: Comment/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
-            db.SaveChanges();
+
+            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/CommentsApi/DeleteComment?Id=" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }       
 
@@ -121,7 +137,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                repository.Dispose();
             }
             base.Dispose(disposing);
         }

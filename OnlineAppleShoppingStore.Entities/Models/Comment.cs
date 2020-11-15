@@ -18,6 +18,7 @@ namespace OnlineAppleShoppingStore.Entities.Models
         public int ForumId { get; set; }
         public string Body { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }//Forum Description
     
         public virtual Forum Forum { get; set; }
     }
