@@ -1,6 +1,7 @@
 ﻿using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
+using OnlineAppleShoppingStore.Web.Utilities;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -92,6 +93,48 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             };
 
             return Json(results);
-        }  
+        }
+
+        [HttpPost]
+        public ActionResult UpdateQuantity(int id, int cartCount)
+        {
+            CartRemove results = null;
+            try
+            {
+                var cart = ShoppingCart.GetCart(this.HttpContext);
+
+                string prodName = repository_c.All
+                    .Single(item => item.ProductId == id).Product.Name;
+
+                int itemCount = cart.UpdateQuantity(id, cartCount);
+
+                string msg = "Quantity of product " + Server.HtmlEncode(prodName) +
+                        " has been updated on ypur cart.";
+                if (itemCount == 0) msg = Server.HtmlEncode(prodName) +
+                        " deleted from shopping cart.";
+
+                results = new CartRemove
+                {
+                    Message = msg,
+                    CartTotal = cart.GetTotal(),
+                    CartCount = cart.GetCount(),
+                    ItemCount = itemCount,
+                    DeleteId = id
+                };
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                results = new CartRemove
+                {
+                    Message = "Error.",
+                    CartTotal = -1,
+                    CartCount = -1,
+                    ItemCount = -1,
+                    DeleteId = id
+                };
+            }
+            return Json(results);
+        }
     }
 }

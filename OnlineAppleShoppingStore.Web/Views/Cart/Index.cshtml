@@ -39,6 +39,7 @@ else
                 <th>Sub-total</th>
                 <th></th>
             </tr>
+            @{int it = 0;}
             @foreach (var item in Model.CartItems)
             {
                 <tr id="row-@item.ProductId">
@@ -48,17 +49,27 @@ else
                     <td>
                         @item.Product.Price
                     </td>
-                    <td id="item-count-@item.ProductId">
-                        @item.Count
+                    <td id="Quantity" align="right" style="padding:0px 5px 0px 5px;">
+
+                        @Html.TextBoxFor(model => model.CartItems[it].Count,
+                            new
+                                 {
+                                     style = "width:30px; text-align:right;",
+                                onkeyup = "clearUpdateMessage();",
+                                onchange = "clearUpdateMessage();"
+                            })
                     </td>
-                    <td>
+                    <td id="cart-subtotal">
                         @((item.Product.Price * item.Count).ToString("c", us))
                     </td>
                     <td>
                         <div>
+                            <button type="button" class="btn " id="Update" name="UpdateQty" value="">
+                                <a href="#" class="UpdateProductQuantity" data-id="@item.ProductId" txt-id="CartItems_@(it)__Count">Update Quantity</a>&nbsp;|&nbsp;
+                            </button>
                             <button type="button" class="btn " id="Remove" name="Remove" value="">
                                 <a href="" class="RemoveLink" data-id="@item.ProductId">
-                                    Remove from cart
+                                   Remove from cart
                                 </a>
                             </button>
                         </div>
@@ -124,6 +135,8 @@ else
     <script type="text/javascript" src="~/Scripts/PayPal/Paypal.js"></script>
     <script type="text/javascript" src="~/Scripts/Cart/Print.js"></script>
     <script type="text/javascript" src="~/Scripts/Cart/Track.js"></script>
+    <script type="text/javascript" src="~/Scripts/Cart/UpdateQuantity.js"></script>
+
 }
 
 

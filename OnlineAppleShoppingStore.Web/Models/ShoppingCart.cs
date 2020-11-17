@@ -91,6 +91,30 @@ namespace OnlineAppleShoppingStore.Web.Models
             return itemCount;
         }
 
+        public int UpdateQuantity(int id, int cartCount)
+        {
+            var cartItem = db.Carts.Single(
+                cart => cart.CartId == ShoppingCartId
+                && cart.ProductId == id);
+
+            int itemCount = 0;
+
+            if (cartItem != null)
+            {
+                if (cartCount > 0)
+                {
+                    cartItem.Count = cartCount;
+                    itemCount = cartItem.Count;
+                }
+                else
+                {
+                    db.Carts.Remove(cartItem);
+                }
+                db.SaveChanges();
+            }
+            return itemCount;
+        }
+
         public void EmptyCart()
         {
             var cartItems = db.Carts.Where(cart => cart.CartId == ShoppingCartId);
