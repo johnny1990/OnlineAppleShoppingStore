@@ -1,8 +1,6 @@
 ﻿@model OnlineAppleShoppingStore.Entities.Models.Category
 
-@{
-    ViewBag.Title = "Delete";
-}
+@{ ViewBag.Title = "Delete"; }
 
 <h2>Delete</h2>
 
@@ -11,6 +9,9 @@
     <h4>Category</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dd>
+            <input id="hidId" name="hidId" type="hidden" value="@ViewBag.CategoryId" />
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -21,12 +22,16 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+@Html.AntiForgeryToken()
 
 <div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <input type="button" id="btnDelete" value="Delete" class="btn btn-default" />    |
     <button type="button" class="btn btn-default"> @Html.ActionLink("Back to List", "Index")</button>
+</div>}
 </div>
-    }
-</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/Categories/DeleteCategory.js"></script>
+}

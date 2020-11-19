@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         private readonly ICategoryRepository repository;
@@ -21,7 +22,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         // GET: Categories
-        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             try
@@ -37,32 +37,24 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         // GET: Categories/Create
-        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Create([Bind(Include = "Id,Name")] Category category)
+        public JsonResult InsertCategory(Category category)
         {
             if (ModelState.IsValid)
             {
                 repository.Insert(category);
                 repository.Save();
-                return RedirectToAction("Index");
             }
-
-            return View(category);
+            return Json(category);
         }
 
         // GET: Categories/Edit/5
-        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
 
@@ -71,6 +63,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = repository.Find(id);
+            ViewBag.CategoryId = id;
             if (category == null)
             {
                 return HttpNotFound();
@@ -79,22 +72,17 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         }
 
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
-        {            
+        public JsonResult UpdateCategory(Category category)
+        {
             if (ModelState.IsValid)
             {
                 repository.Update(category);
                 repository.Save();
-                return RedirectToAction("Index");
+                return Json("Ok");
             }
-
-            return View(category);
+            else
+                return Json("Not ok");
         }
 
         // GET: Categories/Delete/5
@@ -106,6 +94,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = repository.Find(id);
+            ViewBag.CategoryId = id;
             if (category == null)
             {
                 return HttpNotFound();
@@ -113,15 +102,22 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             return View(category);
         }
 
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult DeleteConfirmed(int id)
+        //POST: Categories/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    repository.Delete(id);
+        //    repository.Save();
+        //    return RedirectToAction("Index");
+        //}
+
+        [HttpPost]
+        public JsonResult DeleteCategory(int id)
         {
             repository.Delete(id);
             repository.Save();
-            return RedirectToAction("Index");
+            return Json("");
         }
 
         protected override void Dispose(bool disposing)
