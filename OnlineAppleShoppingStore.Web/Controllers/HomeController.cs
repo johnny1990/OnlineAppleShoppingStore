@@ -23,6 +23,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private readonly IProductsRepository repository_p;
         private readonly IFeedbackRepository repository_f;
         private readonly IDeliverOrdersRepository repository_d;
+        private readonly IProductsOrderedRepository repository_po;
 
         Uri baseAddress = new Uri("https://localhost:44328/api");
         HttpClient client;
@@ -33,7 +34,8 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         public HomeController(IFeedbackRepository objIrepository_f, IOrdersRepository objIrepository_o,
-             ICartsRepository objIrepository_c, IProductsRepository objIrepository_p, IDeliverOrdersRepository objIrepository_d)
+             ICartsRepository objIrepository_c, IProductsRepository objIrepository_p, IDeliverOrdersRepository objIrepository_d,
+             IProductsOrderedRepository objIRepository_po)
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
@@ -43,6 +45,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             repository_c = objIrepository_c;
             repository_p = objIrepository_p;
             repository_d = objIrepository_d;
+            repository_po = objIRepository_po;
         }
 
         public ActionResult Index()
@@ -168,10 +171,10 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 var nrOrders = repository_o.All.Select(p => p.Id);
                 ViewBag.NrOrders = nrOrders.Count();
 
-                var nrProducts = repository_c.All.Select(p => p.Product);
+                var nrProducts = repository_po.All.Select(p => p.Quantity);
                 ViewBag.NrProducts = nrProducts.Count();
 
-                var totalQuantity = repository_c.All.Select(p => p.Count);
+                var totalQuantity = repository_po.All.Select(p => p.Quantity);
                 ViewBag.TotalQuantity = totalQuantity.Sum();
 
                 var productsAvailables = repository_p.All.Select(p => p.Id);
