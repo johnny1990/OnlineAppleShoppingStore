@@ -4,8 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStore.Entities.Models;
 
@@ -16,9 +19,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private readonly IForumsRepository repository;
         private readonly ICommentsRepository repository_c;
 
+        Uri baseAddress = new Uri("https://localhost:44328/api");
+        HttpClient client;
+
         public ForumsController(IForumsRepository objIrepository, 
             ICommentsRepository objIRepository_c)
         {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+
             repository = objIrepository;
             repository_c = objIRepository_c;
         }
@@ -27,7 +36,16 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator, User")]
         public ActionResult Index()
         {
-            return View(repository.All.ToList());
+
+            List<Forum> modelList = new List<Forum>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/ForumsApi/GetForums").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                modelList = JsonConvert.DeserializeObject<List<Forum>>(data);
+            }
+
+            return View(modelList.ToList());
         }
 
         // GET: Forum/Create
@@ -45,30 +63,34 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,Description,Title")] Forum forum)
         {
-            if (ModelState.IsValid)
+
+            string data = JsonConvert.SerializeObject(forum);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/ForumsApi/AddForum", content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                repository.Insert(forum);
-                repository.Save();
                 return RedirectToAction("Index");
             }
 
-            return View(forum);
+            return View();
         }
 
         // GET: Forum/Edit/5
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            Forum model = new Forum();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/ForumsApi/GetForumById?id=" + id).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                string data = response.Content.ReadAsStringAsync().Result;
+                string datamodel  = data.Replace("[", string.Empty).Replace("]", string.Empty);
+                model = JsonConvert.DeserializeObject<Forum>(datamodel);
             }
-            Forum forum = repository.Find(id);
-            if (forum == null)
-            {
-                return HttpNotFound();
-            }
-            return View(forum);
+
+            return View(model);
         }
 
         // POST: Forum/Edit/5
@@ -79,12 +101,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Description,Title")] Forum forum)
         {
-            if (ModelState.IsValid)
+            string data = JsonConvert.SerializeObject(forum);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/ForumsApi/UpdateForum", content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                repository.Update(forum);
-                repository.Save();
                 return RedirectToAction("Index");
             }
+
             return View(forum);
         }
 
@@ -92,16 +117,18 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            Forum model = new Forum();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/ForumsApi/GetForumById?id=" + id).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                string data = response.Content.ReadAsStringAsync().Result;
+                string datamodel = data.Replace("[", string.Empty).Replace("]", string.Empty);
+                model = JsonConvert.DeserializeObject<Forum>(datamodel);
             }
-            Forum forum = repository.Find(id);
-            if (forum == null)
-            {
-                return HttpNotFound();
-            }
-            return View(forum);
+
+            return View(model);
+
         }
 
         // POST: Forum/Delete/5
@@ -110,8 +137,11 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
-            repository.Delete(id);
-            repository.Save();
+            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/ForumsApi/DeleteForum?Id=" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
