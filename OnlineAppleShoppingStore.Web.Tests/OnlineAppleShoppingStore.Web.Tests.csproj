@@ -93,6 +93,7 @@
     <Compile Include="Controllers\CartControllerTest.cs" />
     <Compile Include="Controllers\DashboardControllerTest.cs" />
     <Compile Include="Controllers\ProductsControllerTest.cs" />
+    <Compile Include="Models\ShoppingCartTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -103,14 +104,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OnlineAppleShoppingStore.Entities\OnlineAppleShoppingStore.Entities.csproj">
+      <Project>{F325EDA0-AD16-48D9-A6E6-E526D95FBBBD}</Project>
+      <Name>OnlineAppleShoppingStore.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OnlineAppleShoppingStore.Web\OnlineAppleShoppingStore.Web.csproj">
       <Project>{345C73DB-FCC4-4420-8742-66824E0A76FD}</Project>
       <Name>OnlineAppleShoppingStore.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

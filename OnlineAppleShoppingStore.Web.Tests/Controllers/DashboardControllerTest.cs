@@ -21,13 +21,6 @@ namespace OnlineAppleShoppingStore.Web.Tests.Controllers
             Assert.AreEqual(result, result);
         }
 
-        [TestMethod]
-        public void Browse()
-        {
-            DashboardController controller = new DashboardController();
-            ViewResult result = controller.Browse("IPhone") as ViewResult;
-            Assert.IsNotNull(result);
-        }
 
         [TestMethod]
         public void Supplier()
