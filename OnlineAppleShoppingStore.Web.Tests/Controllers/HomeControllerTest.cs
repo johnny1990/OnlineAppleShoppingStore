@@ -58,21 +58,5 @@ namespace OnlineAppleShoppingStore.Web.Tests.Controllers
             ViewResult result = controller.Feedback() as ViewResult;
             Assert.IsNotNull(result);
         }
-
-        //[TestMethod]
-        //public void FeedbackList()
-        //{
-        //    HomeController controller = new HomeController();
-        //    ViewResult result = controller.FeedbackList() as ViewResult;
-        //    Assert.IsNotNull(result);
-        //}
-
-        //[TestMethod]
-        //public void GeneralStatistics()
-        //{
-        //    HomeController controller = new HomeController();
-        //    ViewResult result = controller.GeneralStatistics() as ViewResult;
-        //    Assert.IsNotNull(result);
-        //}
     }
 }
