@@ -1,10 +1,12 @@
-﻿using OnlineAppleShoppingStore.Contracts;
+﻿using Newtonsoft.Json;
+using OnlineAppleShoppingStore.Contracts;
 using OnlineAppleShoppingStoreAuth.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,12 +19,18 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private readonly IRolesRepository repository_R;
         private readonly IUserRolesRepository repository_U;
 
+        Uri baseAddress = new Uri("https://localhost:44328/api");
+        HttpClient client;
+
         public AdministrationController(IUsersRepository objIrepository, IRolesRepository objIrepository_R,
             IUserRolesRepository objIRepository_U)
         {
             repository = objIrepository;
             repository_R = objIrepository_R;
             repository_U = objIRepository_U;
+
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
         }
 
         [HttpGet]
@@ -53,7 +61,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             try
             {
-                return View(repository.All.ToList());
+                List<AspNetUser> modelList = new List<AspNetUser>();
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/AdministrationApi/GetUsers").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    modelList = JsonConvert.DeserializeObject<List<AspNetUser>>(data);
+                }
+
+                return View(modelList.ToList());
             }
             catch (Exception ex)
             {
@@ -122,7 +138,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {
             try
             {
-                return View(repository_R.All.ToList());
+                List<AspNetRole> modelList = new List<AspNetRole>();
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/AdministrationApi/GetRoles").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    modelList = JsonConvert.DeserializeObject<List<AspNetRole>>(data);
+                }
+
+                return View(modelList.ToList());
             }
             catch (Exception ex)
             {
@@ -212,7 +236,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         {           
             try
             {
-                return View(repository_U.All.ToList());
+                List<AspNetUserRole> modelList = new List<AspNetUserRole>();
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/AdministrationApi/GetUserRoles").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    modelList = JsonConvert.DeserializeObject<List<AspNetUserRole>>(data);
+                }
+
+                return View(modelList.ToList());
             }
             catch (Exception ex)
             {

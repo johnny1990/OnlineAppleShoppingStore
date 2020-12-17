@@ -42,6 +42,45 @@ namespace OnlineAppleShoppingStore.Web.Controllers.API
             }
         }
 
+        [HttpGet]
+        [Route("api/AdministrationApi/GetRoles")]
+        public IHttpActionResult GetRoles()
+        {
+            try
+            {
+                var result = from a in db.AspNetRoles.ToList()
+                             select new
+                             {
+                                 a.Id,
+                                 a.Name
+                             };
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
 
+        [HttpGet]
+        [Route("api/AdministrationApi/GetUserRoles")]
+        public IHttpActionResult GetUserRoles()
+        {
+            try
+            {
+                var result = from a in db.AspNetUserRoles.ToList()
+                             select new
+                             {
+                                 a.Id,
+                                 a.UserId,
+                                 a.RoleId
+                             };
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
     }
 }
