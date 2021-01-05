@@ -2,7 +2,6 @@
 using OnlineAppleShoppingStore.Entities.Models;
 using OnlineAppleShoppingStore.Web.Models;
 using OnlineAppleShoppingStore.Web.Utilities;
-using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,11 +46,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             }
         }
 
-        public ActionResult PrintAllReport()
-        {    
-            var report = new Rotativa.ActionAsPdf("Index");
-            return report;
-        }
 
         [ChildActionOnly]
         public ActionResult Summary()
