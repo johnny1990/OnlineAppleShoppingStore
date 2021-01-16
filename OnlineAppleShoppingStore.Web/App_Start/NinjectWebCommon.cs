@@ -55,6 +55,7 @@ namespace OnlineAppleShoppingStore.Web.App_Start
                 kernel.Bind<IFeedbackRepository>().To<FeedbackRepository>();
                 kernel.Bind<IForumsRepository>().To<ForumsRepository>();
                 kernel.Bind<ICommentsRepository>().To<CommentsRepository>();
+                kernel.Bind<IShippersRepository>().To<ShippersRepository>();
                 kernel.Bind<IUsersRepository>().To<UsersRepository>();
                 kernel.Bind<IRolesRepository>().To<RolesRepository>();
                 kernel.Bind<IUserRolesRepository>().To<UserRolesRepository>();
