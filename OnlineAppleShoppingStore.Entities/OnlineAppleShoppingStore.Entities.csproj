@@ -110,6 +110,9 @@
     <Compile Include="Models\ProductsOrdered.cs">
       <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShippersOrder.cs">
+      <DependentUpon>OnlineAppleShoppingStoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

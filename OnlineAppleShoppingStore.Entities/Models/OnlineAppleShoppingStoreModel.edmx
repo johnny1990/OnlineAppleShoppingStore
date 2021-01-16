@@ -58,6 +58,7 @@
           <Property Name="DeliveryDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DeliverVia" Type="nvarchar" MaxLength="100" />
+          <Property Name="ShipVia" Type="int" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -113,6 +114,14 @@
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippersOrders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="24" />
         </EntityType>
         <Association Name="FK_Comment_Forum_ForumId">
           <End Role="Forum" Type="Self.Forum" Multiplicity="1">
@@ -170,6 +179,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_DeliverOrders_dbo_ShippersOrders">
+          <End Role="ShippersOrders" Type="Self.ShippersOrders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeliverOrders" Type="Self.DeliverOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippersOrders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliverOrders">
+              <PropertyRef Name="ShipVia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Products_dbo_Categories_CategoryId">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -223,6 +246,7 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductsOrdered" EntityType="Self.ProductsOrdered" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippersOrders" EntityType="Self.ShippersOrders" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Comment_Forum_ForumId" Association="Self.FK_Comment_Forum_ForumId">
             <End Role="Forum" EntitySet="Forum" />
             <End Role="Comment" EntitySet="Comment" />
@@ -237,6 +261,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_dbo_DeliverOrders_dbo_Orders_OrderId" Association="Self.FK_dbo_DeliverOrders_dbo_Orders_OrderId">
             <End Role="Orders" EntitySet="Orders" />
+            <End Role="DeliverOrders" EntitySet="DeliverOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DeliverOrders_dbo_ShippersOrders" Association="Self.FK_dbo_DeliverOrders_dbo_ShippersOrders">
+            <End Role="ShippersOrders" EntitySet="ShippersOrders" />
             <End Role="DeliverOrders" EntitySet="DeliverOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="Self.FK_dbo_Products_dbo_Categories_CategoryId">
@@ -314,7 +342,9 @@
           <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DeliverVia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShipVia" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="Self.FK_dbo_DeliverOrders_dbo_Orders_OrderId" FromRole="DeliverOrders" ToRole="Orders" />
+          <NavigationProperty Name="ShippersOrder" Relationship="Self.FK_dbo_DeliverOrders_dbo_ShippersOrders" FromRole="DeliverOrders" ToRole="ShippersOrders" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -379,6 +409,15 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_dbo_ProductsOrdered_dbo_Orders_OrderId" FromRole="ProductsOrdered" ToRole="Orders" />
           <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ProductsOrdered_dbo_Products_ProductId" FromRole="ProductsOrdered" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ShippersOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeliverOrders" Relationship="Self.FK_dbo_DeliverOrders_dbo_ShippersOrders" FromRole="ShippersOrders" ToRole="DeliverOrders" />
         </EntityType>
         <Association Name="FK_dbo_Carts_dbo_Products_ProductId">
           <End Role="Products" Type="Self.Product" Multiplicity="1">
@@ -450,6 +489,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_DeliverOrders_dbo_ShippersOrders">
+          <End Role="ShippersOrders" Type="Self.ShippersOrder" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeliverOrders" Type="Self.DeliverOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippersOrders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliverOrders">
+              <PropertyRef Name="ShipVia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_ProductsOrdered_dbo_Orders_OrderId">
           <End Role="Orders" Type="Self.Order" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -489,6 +542,7 @@
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductsOrdereds" EntityType="Self.ProductsOrdered" />
+          <EntitySet Name="ShippersOrders" EntityType="Self.ShippersOrder" />
           <AssociationSet Name="FK_dbo_Carts_dbo_Products_ProductId" Association="Self.FK_dbo_Carts_dbo_Products_ProductId">
             <End Role="Products" EntitySet="Products" />
             <End Role="Carts" EntitySet="Carts" />
@@ -507,6 +561,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_dbo_DeliverOrders_dbo_Orders_OrderId" Association="Self.FK_dbo_DeliverOrders_dbo_Orders_OrderId">
             <End Role="Orders" EntitySet="Orders" />
+            <End Role="DeliverOrders" EntitySet="DeliverOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DeliverOrders_dbo_ShippersOrders" Association="Self.FK_dbo_DeliverOrders_dbo_ShippersOrders">
+            <End Role="ShippersOrders" EntitySet="ShippersOrders" />
             <End Role="DeliverOrders" EntitySet="DeliverOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ProductsOrdered_dbo_Orders_OrderId" Association="Self.FK_dbo_ProductsOrdered_dbo_Orders_OrderId">
@@ -580,6 +638,7 @@
                 <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DeliverVia" ColumnName="DeliverVia" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -639,6 +698,15 @@
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippersOrders">
+            <EntityTypeMapping TypeName="OnlineAppleShoppingStoreModel.ShippersOrder">
+              <MappingFragment StoreEntitySet="ShippersOrders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

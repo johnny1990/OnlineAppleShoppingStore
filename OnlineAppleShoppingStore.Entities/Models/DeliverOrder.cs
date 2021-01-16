@@ -11,7 +11,7 @@ namespace OnlineAppleShoppingStore.Entities.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class DeliverOrder
     {
         public int Id { get; set; }
@@ -26,8 +26,10 @@ namespace OnlineAppleShoppingStore.Entities.Models
         public System.DateTime DeliveryDate { get; set; }
         public string Status { get; set; }
         public string DeliverVia { get; set; }
-    
+        public Nullable<int> ShipVia { get; set; }
+
         public virtual Order Order { get; set; }
+        public virtual ShippersOrder ShippersOrder { get; set; }
     }
 
     public enum Status : int
@@ -45,3 +47,4 @@ namespace OnlineAppleShoppingStore.Entities.Models
         Store
     }
 }
+
