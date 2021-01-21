@@ -59,19 +59,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return HttpNotFound();
             }
             return View(shippersOrder);
-
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Category category = repository.Find(id);
-            //ViewBag.CategoryId = id;
-            //if (category == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(category);
         }
 
 
