@@ -240,6 +240,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\ShippersController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -336,6 +337,9 @@
     <Content Include="Scripts\Products\DeleteProduct.js" />
     <Content Include="Scripts\Products\InsertProduct.js" />
     <Content Include="Scripts\Products\UpdateProduct.js" />
+    <Content Include="Scripts\Shippers\DeleteShipper.js" />
+    <Content Include="Scripts\Shippers\InsertShipper.js" />
+    <Content Include="Scripts\Shippers\UpdateShipper.js" />
     <Content Include="Scripts\Statistics\BarChart.js" />
     <Content Include="Scripts\Statistics\TestChart.js" />
     <Content Include="Scripts\Uploads\UploadImage.js" />
@@ -435,6 +439,10 @@
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Forums\CommentsByForum.cshtml" />
     <Content Include="Views\Home\Social.cshtml" />
+    <Content Include="Views\Shippers\Create.cshtml" />
+    <Content Include="Views\Shippers\Delete.cshtml" />
+    <Content Include="Views\Shippers\Edit.cshtml" />
+    <Content Include="Views\Shippers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

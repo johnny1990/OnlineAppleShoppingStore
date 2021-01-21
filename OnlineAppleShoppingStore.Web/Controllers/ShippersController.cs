@@ -1,83 +1,86 @@
-﻿using OnlineAppleShoppingStore.Contracts;
-using OnlineAppleShoppingStore.Entities.Models;
-using OnlineAppleShoppingStore.Web.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OnlineAppleShoppingStore.Contracts;
+using OnlineAppleShoppingStore.Entities.Models;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class CategoriesController : Controller
+    public class ShippersController : Controller
     {
-        private readonly ICategoryRepository repository;
+        private readonly IShippersRepository repository;
 
-        public CategoriesController(ICategoryRepository objIrepository)
+        public ShippersController(IShippersRepository objIrepository)
         {
             repository = objIrepository;
         }
 
-        // GET: Categories
+
+        // GET: ShippersOrders
         public ActionResult Index()
         {
-            try
-            {
-                return View(repository.All.ToList());
-            }
-            catch(Exception ex)
-            {
-                Logger.LogWriter.LogException(ex);
-                return HttpNotFound();
-            }
-            
+            return View(repository.All.ToList());
         }
 
-        // GET: Categories/Create
+        // GET: ShippersOrders/Create
         public ActionResult Create()
         {
             return View();
         }
 
-
         [HttpPost]
-        public JsonResult InsertCategory(Category category)
+        public JsonResult InsertShipper(ShippersOrder s)
         {
             if (ModelState.IsValid)
             {
-                repository.Insert(category);
+                repository.Insert(s);
                 repository.Save();
             }
-            return Json(category);
+            return Json(s);
         }
 
-        // GET: Categories/Edit/5
+        // GET: ShippersOrders/Edit/5
         public ActionResult Edit(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = repository.Find(id);
-            ViewBag.CategoryId = id;
-            if (category == null)
+            ShippersOrder shippersOrder = repository.Find(id);
+            ViewBag.ShipperId = id;
+            if (shippersOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(shippersOrder);
 
+
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Category category = repository.Find(id);
+            //ViewBag.CategoryId = id;
+            //if (category == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(category);
         }
 
+
         [HttpPost]
-        public JsonResult UpdateCategory(Category category)
+        public JsonResult UpdateShipper(ShippersOrder s)
         {
             if (ModelState.IsValid)
             {
-                repository.Update(category);
+                repository.Update(s);
                 repository.Save();
                 return Json("Ok");
             }
@@ -85,26 +88,24 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 return Json("Not ok");
         }
 
-        // GET: Categories/Delete/5
-        [Authorize(Roles = "Administrator")]
+        // GET: ShippersOrders/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = repository.Find(id);
-            ViewBag.CategoryId = id;
-            if (category == null)
+            ShippersOrder shippersOrder = repository.Find(id);
+            ViewBag.ShipperId = id;
+            if (shippersOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(shippersOrder);
         }
 
-
         [HttpPost]
-        public JsonResult DeleteCategory(int id)
+        public JsonResult DeleteShipper(int id)
         {
             repository.Delete(id);
             repository.Save();
@@ -113,7 +114,6 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
         protected override void Dispose(bool disposing)
         {
-
             if (disposing)
             {
                 repository.Dispose();
