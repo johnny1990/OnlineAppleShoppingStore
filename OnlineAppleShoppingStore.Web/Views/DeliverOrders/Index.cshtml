@@ -44,6 +44,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DeliverVia)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShippersOrder)
+        </th>
         <th></th>
     </tr>
 
@@ -79,6 +82,9 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.DeliverVia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShippersOrder.Name)
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

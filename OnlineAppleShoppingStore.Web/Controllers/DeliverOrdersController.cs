@@ -23,12 +23,15 @@ namespace OnlineAppleShoppingStore.Web.Controllers
     {
         private readonly IDeliverOrdersRepository repository;
         private readonly IOrdersRepository repository_o;
+        private readonly IShippersRepository repository_s;
         OnlineAppleShoppingStoreEntities db = new OnlineAppleShoppingStoreEntities();
 
-        public DeliverOrdersController(IDeliverOrdersRepository objIrepository, IOrdersRepository objIRepository_o)
+        public DeliverOrdersController(IDeliverOrdersRepository objIrepository, IOrdersRepository objIRepository_o,
+            IShippersRepository objIrepository_s)
         {
             repository = objIrepository;
             repository_o = objIRepository_o;
+            repository_s = objIrepository_s;
         }
 
         // GET: DeliverOrders
@@ -159,6 +162,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
             ViewBag.StatusList = new SelectList(statusData, "Name", "Name");
             ViewBag.DeliverViaList = new SelectList(deliverVia, "Name", "Name");
+            ViewBag.ShippersOrder = new SelectList(repository_s.All.ToList(),"Name","Name");
 
             return View();
         }
@@ -168,7 +172,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status,DeliverVia")] DeliverOrder deliverOrder)
+        public ActionResult Create([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status,DeliverVia, ShipVia")] DeliverOrder deliverOrder)
         {
             if (ModelState.IsValid)
             {
@@ -212,6 +216,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
             ViewBag.StatusList = new SelectList(statusData, "Name", "Name");
             ViewBag.DeliverViaList = new SelectList(deliverVia, "Name", "Name");
+            ViewBag.ShippersOrder = new SelectList(repository_s.All.ToList(), "Id", "Name");
 
             return View(deliverOrder);
         }
@@ -221,7 +226,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status,DeliverVia")] DeliverOrder deliverOrder)
+        public ActionResult Edit([Bind(Include = "Id,OrderId,FirstName,LastName,Address,Phone,Email,OrderDate,Amount,DeliveryDate,Status,DeliverVia,ShipVia")] DeliverOrder deliverOrder)
         {
             if (ModelState.IsValid)
             {
