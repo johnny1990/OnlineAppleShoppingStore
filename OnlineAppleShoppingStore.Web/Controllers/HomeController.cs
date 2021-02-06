@@ -24,6 +24,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         private readonly IFeedbackRepository repository_f;
         private readonly IDeliverOrdersRepository repository_d;
         private readonly IProductsOrderedRepository repository_po;
+        private readonly IShippersRepository repository_s;
 
         Uri baseAddress = new Uri("https://localhost:44328/api");
         HttpClient client;
@@ -34,8 +35,9 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         }
 
         public HomeController(IFeedbackRepository objIrepository_f, IOrdersRepository objIrepository_o,
-             ICartsRepository objIrepository_c, IProductsRepository objIrepository_p, IDeliverOrdersRepository objIrepository_d,
-             IProductsOrderedRepository objIRepository_po)
+             ICartsRepository objIrepository_c, IProductsRepository objIrepository_p, 
+             IDeliverOrdersRepository objIrepository_d, IProductsOrderedRepository objIRepository_po,
+             IShippersRepository objIrepository_s)
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
@@ -46,6 +48,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             repository_p = objIrepository_p;
             repository_d = objIrepository_d;
             repository_po = objIRepository_po;
+            repository_s = objIrepository_s;
         }
 
         public ActionResult Index()
@@ -187,6 +190,9 @@ namespace OnlineAppleShoppingStore.Web.Controllers
 
                 var reviews = repository_f.All.Select(p => p.Id);
                 ViewBag.Reviews = reviews.Count();
+
+                var shippers = repository_s.All.Select(p => p.Id);
+                ViewBag.Shippers = shippers.Count();
 
                 return View();
             }           
