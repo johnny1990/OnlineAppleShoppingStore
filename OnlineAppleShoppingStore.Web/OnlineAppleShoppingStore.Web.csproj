@@ -443,6 +443,7 @@
     <Content Include="Views\Shippers\Delete.cshtml" />
     <Content Include="Views\Shippers\Edit.cshtml" />
     <Content Include="Views\Shippers\Index.cshtml" />
+    <Content Include="Scripts\TsConfig\tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -482,7 +483,9 @@
       <Name>OnlineAppleShoppingStoreAuth.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Scripts\TypeScript\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
