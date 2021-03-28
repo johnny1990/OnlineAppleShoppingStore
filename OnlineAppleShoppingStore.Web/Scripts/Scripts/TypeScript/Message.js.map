@@ -1,0 +1,1 @@
+{"version":3,"file":"Message.js","sourceRoot":"","sources":["../../TsConfig/Message.ts"],"names":[],"mappings":"AAAA,SAAS,SAAS;IACd,QAAQ,CAAC,cAAc,CAAC,QAAQ,CAAC,CAAC,SAAS,GAAG,WAAW,CAAC,QAAQ,CAAC,CAAC;AACxE,CAAC;AAED,SAAS,WAAW,CAAC,IAAY;IAC7B,OAAO,YAAY,GAAG,IAAI,GAAG,mCAAmC,CAAC;AACrE,CAAC"}

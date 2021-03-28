@@ -121,10 +121,15 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Confirm Order" class="btn" />
+                    <input type="submit" value="Confirm Order" class="btn" onclick="AlertUser" />
+                    <h2 id="msgText"></h2>
                 </div>
             </div>
         </div>
     }
 </body>
 </html>
+
+@section scripts{
+    <script src="~/Scripts/TypeScript/Message.js"></script>
+}
