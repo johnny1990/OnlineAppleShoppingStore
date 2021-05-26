@@ -23,7 +23,7 @@ namespace OnlineAppleShoppingStore.Web.Tests.Controllers
             mock.Setup(p => p.Find(1));
             ShippersController s = new ShippersController(mock.Object);
             string result =  s.Edit(1).ToString();
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("c", result);
+            Assert.AreEqual("c", result);
         }
     }
 }
