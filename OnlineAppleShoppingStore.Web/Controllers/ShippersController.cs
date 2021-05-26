@@ -21,9 +21,8 @@ namespace OnlineAppleShoppingStore.Web.Controllers
             repository = objIrepository;
         }
 
-
-        // GET: ShippersOrders
-        public ActionResult Index()
+            // GET: ShippersOrders
+            public ActionResult Index()
         {
             return View(repository.All.ToList());
         }
