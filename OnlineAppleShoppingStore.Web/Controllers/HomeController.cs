@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using PagedList;
 
 namespace OnlineAppleShoppingStore.Web.Controllers
 {
@@ -201,6 +202,27 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 Logger.LogWriter.LogException(ex);
                 return HttpNotFound();
             }
-        }         
+        }
+        
+        [HttpGet]
+        [Authorize]
+        public ActionResult MyOrders()
+        {
+            try
+            {
+                var UserName = User.Identity.GetUserName().ToString();
+
+                IQueryable<Order> order = from p in repository_o.Alls
+                                          where p.CustomerUserName == UserName
+                                          select p;
+                ViewBag.Orders = order.ToList();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter.LogException(ex);
+                return HttpNotFound();
+            }         
+        }
     }
 }

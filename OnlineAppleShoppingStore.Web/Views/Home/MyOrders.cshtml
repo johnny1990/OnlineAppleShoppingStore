@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">MyOrders list</h2>
+
+
+    <table class="table" border="1">
+        <tr class="alert-info">
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Order date
+            </th>
+            <th>
+                Amount
+            </th>
+        </tr>
+
+        @foreach (var item in (List<OnlineAppleShoppingStore.Entities.Models.Order>) ViewBag.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+            </tr>
+        }
+    </table>
+  
+
+
