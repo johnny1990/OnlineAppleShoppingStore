@@ -149,7 +149,7 @@ namespace OnlineAppleShoppingStore.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)/// enable account confirmation!!!!!!
         {
             if (ModelState.IsValid)
             {
@@ -158,12 +158,38 @@ namespace OnlineAppleShoppingStore.Web.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var senderEmail = new MailAddress("", "Online Apple Shopping Store App Password Reset");
+                    var receiverEmail = new MailAddress(user.Email);
+                    var password = "";
+                    var subject = "Confirm your account";
+                    var body = "Please confirm your account by clicking \"" + callbackUrl + "\"";
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp-mail.outlook.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var message = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                        try
+                        {
+                            smtp.Send(message);
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.Message.ToString();
+                        }
 
                     return RedirectToAction("Index", "Home");
                 }
