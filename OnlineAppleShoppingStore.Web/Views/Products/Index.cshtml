@@ -12,19 +12,22 @@
         <th> <button type="button" class="btn btn-default">@Html.ActionLink("New product", "Create")</button></th>
         <th> <button type="button" class="btn btn-default">@Html.ActionLink("Upload Image", "Upload")</button></th>
     </tr>
-    <tr>
-        <th>
-            <select id="CategoryId" name="CategoryId" class="form-control">
-                <option value=0>All</option>
-                @foreach (var item in ViewBag.CategoryId)
-                {
-                    <option value="@item.Value">@item.Text</option>
-                }
-            </select>
-        </th>
-        <th><input type="submit" class="btn btn-default" value="Filter products by Category" /></th>
-    </tr>
-</table>
+    @using (Html.BeginForm())
+    {
+        <tr>
+            <th>
+                <select id="CategoryId" name="CategoryId" class="form-control">
+                    <option value=0>All</option>
+                    @foreach (var item in ViewBag.CategoryId)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </th>
+            <th><input type="submit" class="btn btn-default" value="Filter products by Category" /></th>
+        </tr>
+    }
+    </table>
 
 <table class="table" border="1">
     <tr class="alert-info">
