@@ -37,3 +37,4 @@ namespace OnlineAppleShoppingStore.Entities.Models
         public virtual ICollection<ProductsOrdered> ProductsOrdereds { get; set; }
     }
 }
+
